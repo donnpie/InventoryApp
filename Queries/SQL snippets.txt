@@ -1,0 +1,26 @@
+USE Inventory
+GO;
+
+--Drop and create tables
+
+DROP TABLE IF EXISTS Categories;
+
+CREATE TABLE Categories (
+	ID INT IDENTITY(1, 1) PRIMARY KEY
+	,Name VARCHAR(50) NOT NULL
+	,Description VARCHAR(255)
+);
+
+CREATE TABLE Groups (
+	ID INT IDENTITY(1, 1) PRIMARY KEY
+	,Name VARCHAR(50) NOT NULL
+	,Description VARCHAR(255)
+	,CategoryID INT FOREIGN KEY REFERENCES Categories(ID)
+);
+
+
+--SELECT FROM tables
+SELECT *
+FROM Table
+--WHERE
+;
