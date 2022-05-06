@@ -14,6 +14,7 @@ CREATE TABLE Products (
 	,GenericProductNameID INT FOREIGN KEY REFERENCES GenericProductNames(ID)
 	,BrandID INT FOREIGN KEY REFERENCES Brands(ID)
 	,ProductTradeName VARCHAR(50) NOT NULL UNIQUE
-	,Image BINARY
+	--,Image BINARY --Images will be stored in the file system,  not in the db
 	,Comments VARCHAR(255)
+	,ImageFileName VARCHAR(255) UNIQUE
 );

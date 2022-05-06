@@ -2,11 +2,28 @@
 USE Inventory
 GO
 
-INSERT INTO Products (Barcode, GenericProductNameID, BrandID, ProductTradeName)
-VALUES 
-	('54491472', 8, 1, 'Coke 500ml buddy')
-	,('5010055100001', 9, 2, 'Foster''s lager beer 440ml')
-	,('5010018003165', 8, 3, 'Premium lemonade 330ml')
-;
+EXEC SpInsertProduct 
+	@Barcode = '54491472'
+	,@GenericProductNameID = 8
+	,@BrandID = 1
+	,@ProductTradeName = 'Coke 500ml buddy'
+	,@Comments = ''
+	,@ImageFileName = 'Coke500mlBuddy202204291738.jpg'
 
-SELECT * FROM Products;
+EXEC SpInsertProduct 
+	@Barcode = '5010055100001'
+	,@GenericProductNameID = 9
+	,@BrandID = 2
+	,@ProductTradeName = 'Foster''s lager beer 440ml'
+	,@Comments = ''
+	,@ImageFileName = 'FostersLagerBeer440ml202204291739.jpg'
+
+EXEC SpInsertProduct 
+	@Barcode = '5010018003165'
+	,@GenericProductNameID = 8
+	,@BrandID = 3
+	,@ProductTradeName = 'Premium lemonade 330ml'
+	,@Comments = ''
+	,@ImageFileName = 'PremiumLemonade330ml202204291740.jpg'
+
+--SELECT * FROM Products;

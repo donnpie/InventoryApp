@@ -1,0 +1,11 @@
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WinFormUI.csproj.AssemblyReference.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WinFormUI.csproj.GenerateResource.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WinFormUI.csproj.CoreCompileInputs.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WinFormUI.Forms.MainForm.resources
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WindowsFormsApp1\obj\Debug\WinFormUI.Forms.CategoryForm.resources

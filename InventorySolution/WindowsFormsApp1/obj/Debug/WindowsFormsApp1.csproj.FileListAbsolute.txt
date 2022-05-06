@@ -1,0 +1,9 @@
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\donnp\source\repos\InventorySolution\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

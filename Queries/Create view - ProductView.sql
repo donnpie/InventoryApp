@@ -12,6 +12,8 @@ CREATE VIEW ProductsView AS
 		,P.ProductTradeName
 		,P.GenericProductNameID
 		,Gen.Name AS GenericProductName
+		,P.Comments
+		,P.ImageFileName
 		,P.BrandID
 		,Br.Name AS BrandName
 		,Gen.GroupID

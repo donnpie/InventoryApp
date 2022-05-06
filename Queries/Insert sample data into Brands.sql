@@ -2,11 +2,16 @@
 USE Inventory
 GO
 
-INSERT INTO Brands(Name, Description)
-VALUES 
-	('Cocacola', '')
-	,('Foster''s', '')
-	,('R White''s', '')
-;
+EXEC SpInsertBrand
+	@Name = 'Cocacola'
+	,@Description = '';
 
-SELECT * FROM Brands;
+EXEC SpInsertBrand
+	@Name = 'Foster''s'
+	,@Description = '';
+
+EXEC SpInsertBrand
+	@Name = 'R White''s'
+	,@Description = '';
+
+--SELECT * FROM Brands;

@@ -2,17 +2,49 @@
 USE Inventory
 GO
 
-INSERT INTO GenericProductNames(Name, Description, GroupID)
-VALUES 
-	('Beef', '', 1)
-	,('Pork', '', 1)
-	,('Mutton', '', 1)
-	,('Chicken', '', 2)
-	,('Eggs', '', 2)
-	,('Milk', '', 3)
-	,('Cheese', '', 3)
-	,('Softdrink', '', 10)
-	,('Beer', '', 11)
-;
+--SELECT * FROM GenericProductNames;
 
-SELECT * FROM GenericProductNames;
+EXEC SpInsertGenericProductName 
+	@Name = 'Beef'
+	,@Description = ''
+	,@GroupID = 1
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Pork'
+	,@Description = ''
+	,@GroupID = 1
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Mutton'
+	,@Description = ''
+	,@GroupID = 1
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Chicken'
+	,@Description = ''
+	,@GroupID = 2
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Eggs'
+	,@Description = ''
+	,@GroupID = 2
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Milk'
+	,@Description = ''
+	,@GroupID = 3
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Cheese'
+	,@Description = ''
+	,@GroupID = 3
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Softdrink'
+	,@Description = ''
+	,@GroupID = 10
+
+EXEC SpInsertGenericProductName 
+	@Name = 'Beer'
+	,@Description = ''
+	,@GroupID = 11
