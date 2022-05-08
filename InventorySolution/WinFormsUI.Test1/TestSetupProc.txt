@@ -1,0 +1,6 @@
+﻿How to setup a test project with Xunit:
+
+1. Add new project: Class library (.NET Framework)
+2. Add reference to project containing code to be tested
+3. Using Nuget, add references to Xunit, Xunit.runner.visualstudio, xunit.runner.console
+4. Add using statements for project namespace and xunit namespace

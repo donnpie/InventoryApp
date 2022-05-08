@@ -1,0 +1,10 @@
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\ConsoleUI.exe.config
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\ConsoleUI.exe
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\ConsoleUI.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\SqlLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\SqlLibrary.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.csproj.AssemblyReference.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.csproj.CopyComplete
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.exe
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.pdb
