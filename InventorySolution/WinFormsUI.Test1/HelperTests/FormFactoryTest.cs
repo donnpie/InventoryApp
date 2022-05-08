@@ -21,7 +21,8 @@ namespace WinFormUI.Test1.HelperTests
             Form f = FormFactory.MakeCategoryForm(
                 "Test Category",
                 "Add",
-                new bool[] { false, false, false }
+                FormMode.New,
+                Table.Category
             );
             f.Show();
             string actual = f.Name;

@@ -19,17 +19,13 @@ namespace WinFormUI.Forms
             InitializeComponent();
         }
 
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeCategoryForm(
+                FormMode.New,
+                Table.Category,
                 "Add new Category", 
-                "Add", 
-                new bool[] { false, false, false}
+                "Add"              
             );
             f.Show();
         }
@@ -37,9 +33,9 @@ namespace WinFormUI.Forms
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeGroupForm(
+                FormMode.New,
                 "Add new Group",
-                "AddTest",
-                new bool[] { false, false, false, false }
+                "AddTest"
             );
             f.Show();
         }
@@ -57,9 +53,10 @@ namespace WinFormUI.Forms
         private void brandToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeCategoryForm(
+                FormMode.New,
+                Table.Brand,
                 "Add new Brand",
-                "Add",
-                new bool[] { false, false, false }
+                "Add"
             );
             f.Show();
         }
@@ -67,9 +64,10 @@ namespace WinFormUI.Forms
         private void storeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeCategoryForm(
+                FormMode.New,
+                Table.Store,
                 "Add new Store",
-                "Add",
-                new bool[] { false, false, false }
+                "Add"
             );
             f.Show();
         }

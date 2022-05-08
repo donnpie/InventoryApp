@@ -41,5 +41,14 @@ namespace WinFormUI.Helper
                 return null;
             }
         }
+
+        public static void MessageBoxError(string message)
+        {
+            MessageBox.Show(message
+                , "Error"
+                , MessageBoxButtons.OK
+                , MessageBoxIcon.Error
+            );
+        }
     }
 }

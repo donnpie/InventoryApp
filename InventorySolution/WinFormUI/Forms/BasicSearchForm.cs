@@ -148,13 +148,7 @@ namespace WinFormUI.Forms
                 else if (rdoProduct.Checked) dgv.DataSource = Queries.SearchProductAll(conStr);
                 else if (rdoBrand.Checked) dgv.DataSource = Queries.SearchBrandAll(conStr);
                 else if (rdoStore.Checked) dgv.DataSource = Queries.SearchStoreAll(conStr);
-
-
             }
-
-
         }
-
-
     }
 }

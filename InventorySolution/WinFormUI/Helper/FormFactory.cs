@@ -9,6 +9,21 @@ using System.Windows.Forms;
 
 namespace WinFormUI.Helper
 {
+    public enum FormMode
+    {
+        New,
+        Edit,
+        View,
+        Delete
+    }
+
+    public enum Table
+    {
+        Category,
+        Brand,
+        Store
+    }
+
     public static class FormFactory
     {
         public static MainForm MakeMainForm(string title = "Invetory App")
@@ -19,51 +34,98 @@ namespace WinFormUI.Helper
         }
 
         public static Form MakeCategoryForm(
+            FormMode mode,
+            Table table,
             string title = "Category",
-            string okButtonText = "OK",
-            bool[] canEditFields = null
+            string okButtonText = "OK"           
         )
         {
-            Form f = new CategoryForm();
+            Form f = new CategoryForm(mode, table);
             f.Text = title;
-            System.Windows.Forms.Control[] controls = f.Controls.Find("btnOk", true);
+            Control[] controls = f.Controls.Find("btnOk", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = okButtonText;
 
-
-            if (canEditFields.Length == 3)
+            switch (mode)
             {
-                EnableControl("txtID", f, canEditFields[0]);
-                EnableControl("txtName", f, canEditFields[1]);
-                EnableControl("txtDescription", f, canEditFields[2]);
+                case FormMode.New:
+                    EnableControl("txtID", f, false);
+                    EnableControl("txtName", f, true);
+                    EnableControl("txtDescription", f, true);
+                    break;
+                case FormMode.Edit:
+                    EnableControl("txtID", f, false);
+                    EnableControl("txtName", f, true);
+                    EnableControl("txtDescription", f, true);
+                    break;
+                case FormMode.View:
+                    EnableControl("txtID", f, false);
+                    EnableControl("txtName", f, false);
+                    EnableControl("txtDescription", f, false);
+                    break;
+                case FormMode.Delete:
+                    EnableControl("txtID", f, true);
+                    EnableControl("txtName", f, false);
+                    EnableControl("txtDescription", f, false);
+                    break;
+                default:
+                    EnableControl("txtID", f, false);
+                    EnableControl("txtName", f, false);
+                    EnableControl("txtDescription", f, false);
+                    break;
             }
             return f;
         }
 
         private static void EnableControl(string controlName, Form form, bool enabled)
         {
-            System.Windows.Forms.Control[] c = form.Controls.Find(controlName, true);
-            c[0].Enabled = (c.Length == 1 && enabled) ? true : false;
+            try
+            {
+                System.Windows.Forms.Control[] c = form.Controls.Find(controlName, true);
+                c[0].Enabled = (c.Length == 1 && enabled);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                MessageBox.Show($"{controlName} is not a valid control name. {e.ToString()}"
+                    , "Error"
+                    , MessageBoxButtons.OK
+                    , MessageBoxIcon.Error
+                );
+            }
         }
 
         public static Form MakeGroupForm(
+            FormMode mode,
             string title = "Group",
-            string addButtonText = "Add",
-            bool[] canEditFields = null
+            string addButtonText = "Add"
+            
         )
         {
-            GroupForm f = new GroupForm();
+            GroupForm f = new GroupForm(mode);
             f.Text = title;
             System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
 
-            if (canEditFields.Length == 4)
+            switch (mode)
             {
-                EnableControl("cmbCategoryName", f, canEditFields[0]);
-                EnableControl("txtID", f, canEditFields[1]);
-                EnableControl("txtName", f, canEditFields[2]);
-                EnableControl("txtDescription", f, canEditFields[3]);
+                case FormMode.New:
+                    EnableControl("cmbCategoryName", f, true);
+                    EnableControl("txtID", f, false);
+                    EnableControl("txtName", f, true);
+                    EnableControl("txtDescription", f, true);
+                    break;
+                case FormMode.Edit:
+                    throw new NotImplementedException();
+                    break;
+                case FormMode.View:
+                    throw new NotImplementedException();
+                    break;
+                case FormMode.Delete:
+                    throw new NotImplementedException();
+                    break;
+                default:
+                    throw new ArgumentException("Invalid value for mode parameter");
+                    break;
             }
-
             return f;
         }
 

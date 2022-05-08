@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SqlLibrary.Queries
 {
     public static class Queries
     {
         #region Helper functions
+        public static bool StringIsNull(string s, string fieldName)
+        {
+            if (s == null || s == "")
+            {
+                MessageBox.Show($"{fieldName} field cannot be empty"
+                    , "Error"
+                    , MessageBoxButtons.OK
+                    , MessageBoxIcon.Error
+                );
+                return true;
+            }
+            return false;
+        }
+
         private static DataTable CreateDataAdapter(string conStr, string query)
         {
             SqlConnection conn = new SqlConnection(conStr);
@@ -25,8 +35,8 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableByID(string conStr, string id, string storedProcedureName)
         {
-            if (Helper.Helper.StringIsNull(id, "ID")) { return null; }
-            if (Helper.Helper.StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNull(id, "ID")) { return null; }
+            if (StringIsNull(conStr, "Connection string")) { return null; }
             string query = $"EXEC {storedProcedureName} {id}";
 
             return CreateDataAdapter(conStr, query);
@@ -34,8 +44,8 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableByName(string conStr, string name, string storedProcedureName)
         {
-            if (Helper.Helper.StringIsNull(name, "Name")) { return null; }
-            if (Helper.Helper.StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNull(name, "Name")) { return null; }
+            if (StringIsNull(conStr, "Connection string")) { return null; }
             string query = $"EXEC {storedProcedureName} '{name}'";
 
             return CreateDataAdapter(conStr, query);
@@ -43,8 +53,8 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableByBarcode(string conStr, string barcode, string storedProcedureName)
         {
-            if (Helper.Helper.StringIsNull(barcode, "Barcode")) { return null; }
-            if (Helper.Helper.StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNull(barcode, "Barcode")) { return null; }
+            if (StringIsNull(conStr, "Connection string")) { return null; }
             string query = $"EXEC {storedProcedureName} {barcode}";
 
             return CreateDataAdapter(conStr, query);
@@ -52,7 +62,7 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableAll(string conStr, string storedProcedureName)
         {
-            if (Helper.Helper.StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNull(conStr, "Connection string")) { return null; }
             string query = $"EXEC {storedProcedureName}";
 
             SqlConnection conn = new SqlConnection(conStr);
@@ -63,6 +73,28 @@ namespace SqlLibrary.Queries
             da.Fill(dt);
             conn.Close();
             return dt;
+        }
+
+        private static bool InsertIntoTable(string conStr, string query)
+        {
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            try
+            {
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return (rowsAffected == 1);
+            }
+            catch (SqlException e)
+            {
+                return (false);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
+            
         }
         #endregion
 
@@ -277,5 +309,44 @@ namespace SqlLibrary.Queries
             return SearchTableAll(conStr, "SpSelectStoreAll");
         }
         #endregion
+
+        #region Insert into
+        /// <summary>
+        /// Inserts a record into the specified table
+        /// </summary>
+        /// <param name="conStr">The sql connection string</param>
+        /// <param name="name">The name field of the record</param>
+        /// <param name="description">The description field of the record</param>
+        /// <returns></returns>
+        public static bool InsertCategory(string conStr, string name, string description)
+        {
+            if (StringIsNull(conStr, "Connection string")) { return false; }
+            if (StringIsNull(name, "Name")) { return false; }
+            string query = $"EXEC SpInsertCategory '{name}', '{description}'";
+
+            return InsertIntoTable(conStr, query);
+        }
+
+        public static bool InsertBrand(string conStr, string name, string description)
+        {
+            if (StringIsNull(conStr, "Connection string")) { return false; }
+            if (StringIsNull(name, "Name")) { return false; }
+            string query = $"EXEC SpInsertBrand '{name}', '{description}'";
+
+            return InsertIntoTable(conStr, query);
+        }
+
+        public static bool InsertStore(string conStr, string name, string description)
+        {
+            if (StringIsNull(conStr, "Connection string")) { return false; }
+            if (StringIsNull(name, "Name")) { return false; }
+            string query = $"EXEC SpInsertStore '{name}', '{description}'";
+
+            return InsertIntoTable(conStr, query);
+        }
+
+
+        #endregion
+
     }
 }

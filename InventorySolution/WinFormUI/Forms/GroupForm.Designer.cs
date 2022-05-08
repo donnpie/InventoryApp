@@ -39,8 +39,8 @@ namespace WinFormUI.Forms
             this.lblID = new System.Windows.Forms.Label();
             this.grpGroup = new System.Windows.Forms.GroupBox();
             this.grpCategory = new System.Windows.Forms.GroupBox();
-            this.cmbCategoryName = new System.Windows.Forms.ComboBox();
             this.lblCategoryName = new System.Windows.Forms.Label();
+            this.cmbCategoryName = new System.Windows.Forms.ComboBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.stsGroupStatus = new System.Windows.Forms.StatusStrip();
             this.grpGroup.SuspendLayout();
@@ -140,14 +140,6 @@ namespace WinFormUI.Forms
             this.grpCategory.TabStop = false;
             this.grpCategory.Text = "Category";
             // 
-            // cmbCategoryName
-            // 
-            this.cmbCategoryName.FormattingEnabled = true;
-            this.cmbCategoryName.Location = new System.Drawing.Point(90, 20);
-            this.cmbCategoryName.Name = "cmbCategoryName";
-            this.cmbCategoryName.Size = new System.Drawing.Size(174, 21);
-            this.cmbCategoryName.TabIndex = 0;
-            // 
             // lblCategoryName
             // 
             this.lblCategoryName.AutoSize = true;
@@ -156,7 +148,19 @@ namespace WinFormUI.Forms
             this.lblCategoryName.Size = new System.Drawing.Size(35, 13);
             this.lblCategoryName.TabIndex = 14;
             this.lblCategoryName.Text = "Name";
-            
+            // 
+            // cmbCategoryName
+            // 
+            this.cmbCategoryName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategoryName.FormattingEnabled = true;
+            this.cmbCategoryName.Location = new System.Drawing.Point(90, 20);
+            this.cmbCategoryName.Name = "cmbCategoryName";
+            this.cmbCategoryName.Size = new System.Drawing.Size(174, 21);
+            this.cmbCategoryName.Sorted = true;
+            this.cmbCategoryName.TabIndex = 0;
+            this.cmbCategoryName.SelectedIndexChanged += new System.EventHandler(this.cmbCategoryName_SelectedIndexChanged);
+            this.cmbCategoryName.SelectionChangeCommitted += new System.EventHandler(this.cmbCategoryName_SelectionChangeCommitted);
+            this.cmbCategoryName.SelectedValueChanged += new System.EventHandler(this.cmbCategoryName_SelectedValueChanged);
             // 
             // btnClose
             // 
@@ -175,7 +179,7 @@ namespace WinFormUI.Forms
             this.stsGroupStatus.TabIndex = 14;
             this.stsGroupStatus.Text = "statusStrip1";
             // 
-            // frmGroup
+            // GroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -186,7 +190,7 @@ namespace WinFormUI.Forms
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.grpGroup);
-            this.Name = "frmGroup";
+            this.Name = "GroupForm";
             this.Text = "Group";
             this.grpGroup.ResumeLayout(false);
             this.grpGroup.PerformLayout();
