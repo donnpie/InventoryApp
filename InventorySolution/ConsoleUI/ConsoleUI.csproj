@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
+      <Project>{21ad933c-12b1-40ec-b0e3-30f089feb688}</Project>
+      <Name>ModelLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SqlLibrary\SqlLibrary.csproj">
       <Project>{c1631b50-2f68-49af-807b-15a67a11b9c3}</Project>
       <Name>SqlLibrary</Name>

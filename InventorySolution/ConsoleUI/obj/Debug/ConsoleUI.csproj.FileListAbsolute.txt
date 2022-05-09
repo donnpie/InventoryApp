@@ -8,3 +8,5 @@ C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.csproj.CopyComplete
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.exe
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\obj\Debug\ConsoleUI.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\ModelLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ConsoleUI\bin\Debug\ModelLibrary.pdb

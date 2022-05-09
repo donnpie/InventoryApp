@@ -1,0 +1,6 @@
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\bin\Debug\ModelLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\bin\Debug\ModelLibrary.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\obj\Debug\ModelLibrary.csproj.AssemblyReference.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\obj\Debug\ModelLibrary.csproj.CoreCompileInputs.cache
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\obj\Debug\ModelLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\ModelLibrary\obj\Debug\ModelLibrary.pdb
