@@ -5,13 +5,17 @@ VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormUI", "WinFormUI\WinFormUI.csproj", "{85DB2FD6-0366-4EC3-9B7F-8981324D81AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI.Test", "WinFormsUI.Test1\WinFormsUI.Test.csproj", "{389E5DED-7499-4E15-B60B-AFCF7ABF8D74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormUI.Test", "WinFormsUI.Test1\WinFormUI.Test.csproj", "{389E5DED-7499-4E15-B60B-AFCF7ABF8D74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLibrary", "SqlLibrary\SqlLibrary.csproj", "{C1631B50-2F68-49AF-807B-15A67A11B9C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLibrary", "ModelLibrary\ModelLibrary.csproj", "{21AD933C-12B1-40EC-B0E3-30F089FEB688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{F857E538-DF49-444C-8E67-5B43E2FCA42B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLibrary.Test", "ModelLibrary.Test\ModelLibrary.Test.csproj", "{1D6E30CA-944C-4AC5-A68D-2147106B0AC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLibrary.Test", "SqlLibrary.Test\SqlLibrary.Test.csproj", "{F06B5586-3374-4C4C-AD44-1B5AB45505D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{F857E538-DF49-444C-8E67-5B43E2FCA42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F857E538-DF49-444C-8E67-5B43E2FCA42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F857E538-DF49-444C-8E67-5B43E2FCA42B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D6E30CA-944C-4AC5-A68D-2147106B0AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D6E30CA-944C-4AC5-A68D-2147106B0AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D6E30CA-944C-4AC5-A68D-2147106B0AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D6E30CA-944C-4AC5-A68D-2147106B0AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06B5586-3374-4C4C-AD44-1B5AB45505D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06B5586-3374-4C4C-AD44-1B5AB45505D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06B5586-3374-4C4C-AD44-1B5AB45505D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06B5586-3374-4C4C-AD44-1B5AB45505D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

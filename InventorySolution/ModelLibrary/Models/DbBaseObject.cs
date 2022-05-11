@@ -29,11 +29,19 @@ namespace ModelLibrary.Models
 
         public DbBaseObject(int id, string name)
         {
-            if (IsValidId(id)) this.id = id;
-            name = ValidateName(name);
+            //if (IsValidId(id)) this.id = id;
+            Id = id;
+            //this.name = ValidateName(name);
+            Name = name;
         }
 
-        public void Print()
+        public DbBaseObject(string name)
+        {
+            Id = 0;
+            Name = name;
+        }
+
+        public virtual void Print()
         {
             Console.WriteLine($"ID: {id}");
             Console.WriteLine($"Name: {name}");

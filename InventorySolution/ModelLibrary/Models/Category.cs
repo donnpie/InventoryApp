@@ -6,20 +6,16 @@ using System.Threading.Tasks;
 
 namespace ModelLibrary.Models
 {
-    public class Category : DbBaseObject
+    public class Category : DbSimpleObject
     {
-        private string description;
-        public Category(int id, string name, string description) : base(id, name)
-        {
-            this.description = description;
-        }
+        //private string description;
+        public Category(int id, string name, string description) : base(id, name, description) { }
 
-        string Description { get; set; }
+        public Category(string name, string description) : base(name, description) { }
+    }
 
-        public void Print()
-        {
-            base.Print();
-            Console.WriteLine($"Description: {description}");
-        }
+    public class CategoryList : List<Category>
+    {
+
     }
 }

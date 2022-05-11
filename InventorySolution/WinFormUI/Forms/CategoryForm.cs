@@ -1,5 +1,7 @@
-﻿using SqlLibrary.Queries;
+﻿using ModelLibrary.Models;
+using SqlLibrary.Queries;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -13,7 +15,9 @@ namespace WinFormUI.Forms
         public CategoryForm(FormMode mode, Table table)
         {
             InitializeComponent();
-            conStr = ConfigInfo.GetConString("ConString");
+            conStr = ConfigInfo.GetConString("ConString"); //Throws error when unit testing
+            //conStr = "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
+            Debug.Print(conStr);
             this.mode = mode;
             this.table = table;
         }
@@ -22,6 +26,9 @@ namespace WinFormUI.Forms
         {
             string name = txtName.Text;
             string description = txtDescription.Text;
+            Category cat = new Category(name, description);
+
+
             bool result = false;
             switch (mode)
             {
@@ -29,7 +36,8 @@ namespace WinFormUI.Forms
                     switch (table)
                     {
                         case Table.Category:
-                            result = Queries.InsertCategory(conStr, name, description);
+                            //result = Queries.InsertCategory(conStr, name, description);
+                            result = Queries.InsertCategory(conStr, cat);
                             break;
                         case Table.Brand:
                             result = Queries.InsertBrand(conStr, name, description);

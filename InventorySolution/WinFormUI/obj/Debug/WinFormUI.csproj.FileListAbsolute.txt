@@ -33,3 +33,9 @@ C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\SqlLibrary.pdb
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\obj\Debug\WinFormUI.csproj.CopyComplete
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\obj\Debug\WinFormUI.Forms.BasicSearchForm.resources
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\ModelLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\ModelLibrary.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.abstractions.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.reporters.net452.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.utility.net452.dll

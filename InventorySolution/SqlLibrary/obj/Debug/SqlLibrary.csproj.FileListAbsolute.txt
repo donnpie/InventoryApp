@@ -4,3 +4,6 @@ C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\obj\Debug
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\obj\Debug\SqlLibrary.csproj.CoreCompileInputs.cache
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\obj\Debug\SqlLibrary.dll
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\obj\Debug\SqlLibrary.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\bin\Debug\ModelLibrary.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\bin\Debug\ModelLibrary.pdb
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\SqlLibrary\obj\Debug\SqlLibrary.csproj.CopyComplete

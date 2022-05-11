@@ -10,7 +10,10 @@ namespace WinFormUI.Helper
     {
         public static string GetConString(string conString)
         {
-            return ConfigurationManager.ConnectionStrings[conString].ConnectionString;
+            //return ConfigurationManager.ConnectionStrings[conString].ConnectionString;
+
+            return "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
+
         }
 
         //public static void SearchDb(BasicSearchForm f)

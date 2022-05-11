@@ -7,11 +7,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{389E5DED-7499-4E15-B60B-AFCF7ABF8D74}</ProjectGuid>
+    <ProjectGuid>{F06B5586-3374-4C4C-AD44-1B5AB45505D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinFormUI.Test1</RootNamespace>
-    <AssemblyName>WinFormUI.Test1</AssemblyName>
+    <RootNamespace>SqlLibrary.Test</RootNamespace>
+    <AssemblyName>SqlLibrary.Test</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -38,7 +38,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,24 +58,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormTests\FormTest.cs" />
-    <Compile Include="HelperTests\FormFactoryTest.cs" />
+    <Compile Include="QueriesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WinFormUI\WinFormUI.csproj">
-      <Project>{85db2fd6-0366-4ec3-9b7f-8981324d81af}</Project>
-      <Name>WinFormUI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestSetupProc.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\WinFormUI\App.config">
+      <Link>App.config</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SqlLibrary\SqlLibrary.csproj">
+      <Project>{c1631b50-2f68-49af-807b-15a67a11b9c3}</Project>
+      <Name>SqlLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

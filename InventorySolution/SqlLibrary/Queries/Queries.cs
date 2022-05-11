@@ -1,5 +1,8 @@
-﻿using System.Data;
+﻿using ModelLibrary.Models;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace SqlLibrary.Queries
@@ -41,6 +44,16 @@ namespace SqlLibrary.Queries
 
             return CreateDataAdapter(conStr, query);
         }
+
+        //private static DataTable SearchTableByID(string conStr, string id, string storedProcedureName)
+        //{
+        //    if (StringIsNull(id, "ID")) { return null; }
+        //    if (StringIsNull(conStr, "Connection string")) { return null; }
+        //    string query = $"EXEC {storedProcedureName} {id}";
+
+        //    //return CreateDataAdapter(conStr, query);
+            
+        //}
 
         private static DataTable SearchTableByName(string conStr, string name, string storedProcedureName)
         {
@@ -108,6 +121,38 @@ namespace SqlLibrary.Queries
         public static DataTable SearchCategoryByID(string conStr, string id)
         {
             return SearchTableByID(conStr, id, "SpSelectCategoryById");
+        }
+
+        public static Category SearchCategoryByIdReturnCategory(string conStr, string id)
+        {
+            if (StringIsNull(id, "ID")) { return null; }
+            if (StringIsNull(conStr, "Connection string")) { return null; }
+            string query = $"EXEC SpSelectCategoryById {id}";
+
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //List<Category> catList = new List<Category>();
+            CategoryList catList = new CategoryList();
+            while (reader.Read())
+            {
+                IDataRecord rcd = (IDataRecord)reader;
+                //Debug.Print($"{rcd[0]} {rcd[1]} {rcd[2]}");
+                catList.Add(new Category((int)rcd[0], (string)rcd[1], (string)rcd[2]));
+            }
+            //IDataRecord rcd = (IDataRecord)reader;
+            //Category cat = new Category((int)rcd[0], (string)rcd[1], (string)rcd[2]);
+
+
+            //SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
+            conn.Close();
+            
+            return catList[0];
+
         }
 
         /// <summary>
@@ -323,6 +368,15 @@ namespace SqlLibrary.Queries
             if (StringIsNull(conStr, "Connection string")) { return false; }
             if (StringIsNull(name, "Name")) { return false; }
             string query = $"EXEC SpInsertCategory '{name}', '{description}'";
+
+            return InsertIntoTable(conStr, query);
+        }
+
+        public static bool InsertCategory(string conStr, Category cat)
+        {
+            if (StringIsNull(conStr, "Connection string")) { return false; }
+            if (StringIsNull(cat.Name, "Name")) { return false; }
+            string query = $"EXEC SpInsertCategory '{cat.Name}', '{cat.Description}'";
 
             return InsertIntoTable(conStr, query);
         }
