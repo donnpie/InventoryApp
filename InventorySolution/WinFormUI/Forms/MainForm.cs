@@ -35,7 +35,7 @@ namespace WinFormUI.Forms
             Form f = FormFactory.MakeGroupForm(
                 FormMode.New,
                 "Add new Group",
-                "AddTest"
+                "Add"
             );
             f.Show();
         }

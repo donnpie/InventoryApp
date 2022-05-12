@@ -142,7 +142,7 @@ namespace WinFormUI.Forms
             }
             else if (rdoAll.Checked)
             {
-                if (rdoCategory.Checked) dgv.DataSource = Queries.SearchCategoryAll(conStr);
+                if (rdoCategory.Checked) dgv.DataSource = Queries.SearchCategoryAllReturnCategoryList(conStr);
                 else if (rdoGroup.Checked) dgv.DataSource = Queries.SearchGroupAll(conStr);
                 else if (rdoGpn.Checked) dgv.DataSource = Queries.SearchGpnAll(conStr);
                 else if (rdoProduct.Checked) dgv.DataSource = Queries.SearchProductAll(conStr);

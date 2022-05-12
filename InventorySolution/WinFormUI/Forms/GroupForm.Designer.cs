@@ -64,6 +64,7 @@ namespace WinFormUI.Forms
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtDescription
             // 
@@ -158,9 +159,7 @@ namespace WinFormUI.Forms
             this.cmbCategoryName.Size = new System.Drawing.Size(174, 21);
             this.cmbCategoryName.Sorted = true;
             this.cmbCategoryName.TabIndex = 0;
-            this.cmbCategoryName.SelectedIndexChanged += new System.EventHandler(this.cmbCategoryName_SelectedIndexChanged);
             this.cmbCategoryName.SelectionChangeCommitted += new System.EventHandler(this.cmbCategoryName_SelectionChangeCommitted);
-            this.cmbCategoryName.SelectedValueChanged += new System.EventHandler(this.cmbCategoryName_SelectedValueChanged);
             // 
             // btnClose
             // 

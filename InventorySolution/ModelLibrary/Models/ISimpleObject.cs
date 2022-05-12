@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ModelLibrary.Models
 {
-    public interface IBaseObject
+    public interface ISimpleObject : IBaseObject
     {
-        int Id { get; set; }
-
-        string Name { get; set; }
-
-        void Print();
+        string Description { get; set; }
     }
 }

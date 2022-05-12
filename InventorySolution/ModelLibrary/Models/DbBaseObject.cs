@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace ModelLibrary.Models
 {
-    public abstract class DbBaseObject : IBaseObject
+    public class DbBaseObject : IBaseObject
     {
         int id;
         string name;
-        public int Id { get { return id; } 
-            private set {  if (IsValidId(value)) id = value; } }
+        public int Id
+        {
+            get { return id; }
+            set { if (IsValidId(value)) id = value; }
+        }
         public string Name{ get { return name; }
             set { name = ValidateName(value); } } 
         //TODO: test that ensures name is truncated at 50 chars
@@ -27,6 +30,11 @@ namespace ModelLibrary.Models
             return (name.Length <= 50) ? this.name = name : this.name = name.Substring(0, 50);
         }
 
+        public DbBaseObject()
+        {
+            Id = 0;
+            Name = "";
+        }
         public DbBaseObject(int id, string name)
         {
             //if (IsValidId(id)) this.id = id;

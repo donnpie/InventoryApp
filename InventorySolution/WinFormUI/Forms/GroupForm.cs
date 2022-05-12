@@ -1,12 +1,8 @@
-﻿using SqlLibrary.Queries;
+﻿using ModelLibrary.Models;
+using SqlLibrary.Queries;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -17,18 +13,20 @@ namespace WinFormUI.Forms
         string conStr;
         FormMode mode;
         List<string> values;
+        Category selectedCategory;
         public GroupForm(FormMode mode)
         {
             InitializeComponent();
             conStr = ConfigInfo.GetConString("ConString");
             this.mode = mode;
             values = new List<string>();
-            TestDataTable();
+            //LoadCategoryDataFromDataTable();
+            LoadCategoryDataFromList();
         }
 
-        void TestDataTable()
+        void LoadCategoryDataFromDataTable()
         {
-            DataTable dt = Queries.SearchCategoryAll(conStr);
+            DataTable dt = Queries.SearchCategoryAllReturnDataTable(conStr);
 
             
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -44,27 +42,45 @@ namespace WinFormUI.Forms
             //string result = myList.Single(s => s == search);
         }
 
-        private void cmbCategoryName_SelectedValueChanged(object sender, EventArgs e)
+        void LoadCategoryDataFromList()
         {
-            //ComboBox cmb = (ComboBox)sender;
-            //int index = cmb.SelectedIndex;
-            //string value = (string)cmb.SelectedValue;
-            //string text = cmb.SelectedText;
-            //MessageBox.Show($"{index}, {value}, {text}");
+            List<Category> list = Queries.SearchCategoryAllReturnCategoryList(conStr);
+            //list.Sort();
+            this.cmbCategoryName.DataSource = list;
+            this.cmbCategoryName.ValueMember = "Id";
+            this.cmbCategoryName.DisplayMember = "Name";
+            
+
+            //Find an item in a list using Linq
+            //string search = "lookforme";
+            //List<string> myList = new List<string>();
+            //string result = myList.Single(s => s == search);
         }
+
+
 
         private void cmbCategoryName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //MessageBox.Show($"{cmbCategoryName.SelectedValue}");
+            selectedCategory = cmbCategoryName.SelectedItem as Category;
+            //MessageBox.Show($"{cat.Id}, {cat.Name}");
         }
 
-        private void cmbCategoryName_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            ComboBox cmb = (ComboBox)sender;
-            int index = cmb.SelectedIndex;
-            string value = (string)cmb.SelectedValue;
-            string text = cmb.SelectedText;
-            MessageBox.Show($"{index}, {value}, {text}");
+            string name = txtName.Text;
+            string description = txtDescription.Text;
+            Group group = new Group(0, name, description, selectedCategory);
+            bool result = Queries.InsertGroup(conStr, group);
+            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert");
         }
+
+        //private void cmbCategoryName_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    ComboBox cmb = (ComboBox)sender;
+        //    int index = cmb.SelectedIndex;
+        //    string value = (string)cmb.SelectedValue;
+        //    string text = cmb.SelectedText;
+        //    MessageBox.Show($"{index}, {value}, {text}");
+        //}
     }
 }
