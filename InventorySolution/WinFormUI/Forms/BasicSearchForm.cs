@@ -13,6 +13,7 @@ namespace WinFormUI.Forms
             InitializeComponent();
             conStr = ConfigInfo.GetConString("ConString");
             rdoCategory.Checked = true;
+            rdoAll.Checked = true;
         }
 
         private void EnableAllQueryTypeRadioButtons()

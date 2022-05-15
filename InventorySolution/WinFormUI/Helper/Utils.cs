@@ -42,6 +42,17 @@ namespace WinFormUI.Helper
             }
         }
 
+        public static bool TextBoxValueIsNullOrEmpty(TextBox txtBox, string fieldName)
+        {
+            if (txtBox.Text is null || txtBox.Text == "")
+            {
+                MessageBoxError($"The {fieldName} field cannot be empty");
+                txtBox.BackColor = System.Drawing.Color.LightPink;
+                return true;
+            }
+            return false;
+        }
+
         public static void MessageBoxError(string message)
         {
             MessageBox.Show(message

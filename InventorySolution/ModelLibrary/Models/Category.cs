@@ -8,8 +8,6 @@ namespace ModelLibrary.Models
 {
     public class Category : DbSimpleObject, ISimpleObject
     {
-        public Category() : base() { }
-
         public Category(int id, string name, string description) : base(id, name, description) { }
 
         public Category(string name, string description) : base(name, description) { }

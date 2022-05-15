@@ -8,9 +8,9 @@ namespace ModelLibrary.Models
 {
     public interface IBaseObject
     {
-        int Id { get; set; }
+        int Id { get; }
 
-        string Name { get; set; }
+        string Name { get; }
 
         void Print();
     }

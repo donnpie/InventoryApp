@@ -11,28 +11,9 @@ namespace SqlLibrary.Queries
     public static class Queries
     {
         #region Helper functions
-        public static bool StringIsNull(string s, string fieldName)
+        public static bool StringIsNullOrEmpty(string s)
         {
-            if (s == null || s == "")
-            {
-                MessageBoxError($"{fieldName} field cannot be empty");
-                //MessageBox.Show($"{fieldName} field cannot be empty"
-                //    , "Error"
-                //    , MessageBoxButtons.OK
-                //    , MessageBoxIcon.Error
-                //);
-                return true;
-            }
-            return false;
-        }
-
-        private static void MessageBoxError(string message)
-        {
-            MessageBox.Show(message
-                    , "Error"
-                    , MessageBoxButtons.OK
-                    , MessageBoxIcon.Error
-                );
+            return (s is null || s == "");
         }
 
         private static DataTable CreateDataTable(string conStr, string query)
@@ -49,27 +30,17 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableByID(string conStr, string id, string storedProcedureName)
         {
-            if (StringIsNull(id, "ID")) { return null; }
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(id)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC {storedProcedureName} {id}";
 
             return CreateDataTable(conStr, query);
         }
 
-        //private static DataTable SearchTableByID(string conStr, string id, string storedProcedureName)
-        //{
-        //    if (StringIsNull(id, "ID")) { return null; }
-        //    if (StringIsNull(conStr, "Connection string")) { return null; }
-        //    string query = $"EXEC {storedProcedureName} {id}";
-
-        //    //return CreateDataAdapter(conStr, query);
-            
-        //}
-
         private static DataTable SearchTableByName(string conStr, string name, string storedProcedureName)
         {
-            if (StringIsNull(name, "Name")) { return null; }
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(name)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC {storedProcedureName} '{name}'";
 
             return CreateDataTable(conStr, query);
@@ -77,8 +48,8 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableByBarcode(string conStr, string barcode, string storedProcedureName)
         {
-            if (StringIsNull(barcode, "Barcode")) { return null; }
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(barcode)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC {storedProcedureName} {barcode}";
 
             return CreateDataTable(conStr, query);
@@ -86,30 +57,21 @@ namespace SqlLibrary.Queries
 
         private static DataTable SearchTableAllReturnDataTable(string conStr, string storedProcedureName)
         {
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC {storedProcedureName}";
 
             return CreateDataTable(conStr, query);
         }
 
-        //private static CategoryList SearchCategoryTableAllReturnCategoryList(string conStr, string storedProcedureName)
-        //{
-        //    if (StringIsNull(conStr, "Connection string")) { return null; }
-        //    string query = $"EXEC {storedProcedureName}";
-        //    return CreateCategoryList(conStr, query);
-        //}
-
         private static List<Category> SearchCategoryTableAllReturnCategoryList(string conStr, string storedProcedureName)
         {
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC {storedProcedureName}";
             return CreateCategoryList(conStr, query);
         }
 
         private static List<Category> CreateCategoryList(string conStr, string query)
         {
-            //SqlDataReader reader = GetDataReader(conStr, query);
-
             SqlConnection conn = new SqlConnection(conStr);
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
@@ -122,24 +84,8 @@ namespace SqlLibrary.Queries
             }
             conn.Close();
 
-            
-            return (List<Category>)list;
-                    
-            
-            
+            return list;
         }
-
-        private static SqlDataReader GetDataReader(string conStr, string query)
-        {
-            SqlConnection conn = new SqlConnection(conStr);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            conn.Close();
-            return reader;
-        }
-
-
 
         private static bool InsertIntoTable(string conStr, string query)
         {
@@ -153,14 +99,12 @@ namespace SqlLibrary.Queries
             }
             catch (SqlException e)
             {
-                return (false);
+                return false;
             }
             finally
             {
                 conn.Close();
             }
-            
-            
         }
         #endregion
 
@@ -178,22 +122,11 @@ namespace SqlLibrary.Queries
 
         public static Category SearchCategoryByIdReturnCategory(string conStr, string id)
         {
-            if (StringIsNull(id, "ID")) { return null; }
-            if (StringIsNull(conStr, "Connection string")) { return null; }
+            if (StringIsNullOrEmpty(id)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
             string query = $"EXEC SpSelectCategoryById {id}";
-            //SqlDataReader reader = GetDataReader(conStr, query);
-            SqlConnection conn = new SqlConnection(conStr);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            var list = new List<Category>();
-            List<Category> catList = new List<Category>();
-            while (reader.Read())
-            {
-                IDataRecord rcd = (IDataRecord)reader;
-                catList.Add(new Category((int)rcd[0], (string)rcd[1], (string)rcd[2]));
-            }
-            conn.Close();
+
+            List<Category> catList = CreateCategoryList(conStr, query);
             return catList[0];
         }
 
@@ -412,27 +345,18 @@ namespace SqlLibrary.Queries
         /// <returns></returns>
         public static bool InsertCategory(string conStr, string name, string description)
         {
-            if (StringIsNull(conStr, "Connection string")) { return false; }
-            if (StringIsNull(name, "Name")) { return false; }
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(name)) { return false; }
             string query = $"EXEC SpInsertCategory '{name}', '{description}'";
-
-            return InsertIntoTable(conStr, query);
-        }
-
-        public static bool InsertCategory(string conStr, Category cat)
-        {
-            if (StringIsNull(conStr, "Connection string")) { return false; }
-            if (StringIsNull(cat.Name, "Name")) { return false; }
-            string query = $"EXEC SpInsertCategory '{cat.Name}', '{cat.Description}'";
 
             return InsertIntoTable(conStr, query);
         }
 
         public static bool InsertGroup(string conStr, Group group)
         {
-            if (StringIsNull(conStr, "Connection string")) { return false; }
-            if (StringIsNull(group.Name, "Name")) { return false; }
-            if (StringIsNull(group.Category.Name, "Category name")) { return false; }
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(group.Name)) { return false; }
+            if (StringIsNullOrEmpty(group.Category.Name)) { return false; }
             if (group.Category.Id < 1) { return false; }
             string query = $"EXEC SpInsertGroup '{group.Name}', '{group.Description}', {group.Category.Id}";
 
@@ -441,8 +365,8 @@ namespace SqlLibrary.Queries
 
         public static bool InsertBrand(string conStr, string name, string description)
         {
-            if (StringIsNull(conStr, "Connection string")) { return false; }
-            if (StringIsNull(name, "Name")) { return false; }
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(name)) { return false; }
             string query = $"EXEC SpInsertBrand '{name}', '{description}'";
 
             return InsertIntoTable(conStr, query);
@@ -450,8 +374,8 @@ namespace SqlLibrary.Queries
 
         public static bool InsertStore(string conStr, string name, string description)
         {
-            if (StringIsNull(conStr, "Connection string")) { return false; }
-            if (StringIsNull(name, "Name")) { return false; }
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(name)) { return false; }
             string query = $"EXEC SpInsertStore '{name}', '{description}'";
 
             return InsertIntoTable(conStr, query);

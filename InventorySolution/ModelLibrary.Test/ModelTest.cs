@@ -1,9 +1,5 @@
 ﻿using ModelLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ModelLibrary.Test
@@ -25,7 +21,47 @@ namespace ModelLibrary.Test
             Assert.Equal(id, cat.Id);
             Assert.Equal(name, cat.Name);
             Assert.Equal(description, cat.Description);
+        }
 
+        [Fact]
+        public void Category_IdIsZeroShouldReadCorrect()
+        {
+            //Arrange
+            int id = 0;
+            string name = "Test name";
+            string description = "Test description";
+
+            //Action
+            Category cat = new Category(id, name, description);
+
+            //Assert
+            Assert.Equal(id, cat.Id);
+            Assert.Equal(name, cat.Name);
+            Assert.Equal(description, cat.Description);
+        }
+
+        [Fact]
+        public void Category_InvalidIdShouldThrowArgumentException()
+        {
+            //Arrange
+            int id = -1;
+            string name = "Valid name";
+            string description = "valid description";
+
+            //Assert
+            Assert.Throws<ArgumentException>(() => new Category(id, name, description));
+        }
+
+        [Fact]
+        public void Category_InvalidNameShouldThrowArgumentException()
+        {
+            //Arrange
+            int id = 1;
+            string name = "";
+            string description = "valid description";
+
+            //Assert
+            Assert.Throws<ArgumentException>(() => new Category(id, name, description));
         }
     }
 }

@@ -9,25 +9,25 @@ namespace WinFormUI.Forms
 {
     public partial class CategoryForm : Form
     {
-        string conStr;
-        FormMode mode;
-        Table table;
+        readonly string conStr;
+        readonly FormMode mode;
+        readonly Table table;
+
         public CategoryForm(FormMode mode, Table table)
         {
             InitializeComponent();
-            conStr = ConfigInfo.GetConString("ConString"); //Throws error when unit testing
-            //conStr = "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
-            Debug.Print(conStr);
+            conStr = ConfigInfo.GetConString("ConString");
             this.mode = mode;
             this.table = table;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
-            string description = txtDescription.Text;
-            Category cat = new Category(name, description);
 
+            string name = txtName.Text;
+            if (Utils.TextBoxValueIsNullOrEmpty(txtName, "Name")) return;
+            txtName.BackColor = System.Drawing.Color.White;
+            string description = txtDescription.Text;
 
             bool result = false;
             switch (mode)
@@ -36,8 +36,7 @@ namespace WinFormUI.Forms
                     switch (table)
                     {
                         case Table.Category:
-                            //result = Queries.InsertCategory(conStr, name, description);
-                            result = Queries.InsertCategory(conStr, cat);
+                            result = Queries.InsertCategory(conStr, name, description);
                             break;
                         case Table.Brand:
                             result = Queries.InsertBrand(conStr, name, description);
@@ -123,13 +122,9 @@ namespace WinFormUI.Forms
             if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert");
         }
 
-        private void InsertCategory(string v1, string conStr, string v2, object name, string v3, object description)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
-
-       
-
-
     }
 }
