@@ -141,6 +141,23 @@ namespace SqlLibrary.Queries
             return SearchTableByID(conStr, id, "SpSelectGroupById");
         }
 
+        public static List<Group> SearchGroupByCategoryID(string conStr, Category cat)
+        {
+            SqlConnection con = new SqlConnection(conStr);
+            string query = $"EXEC SpSelectGroupByCategoryId {cat.Id}";
+            SqlCommand com = new SqlCommand(query, con);
+            con.Open();
+            SqlDataReader reader = com.ExecuteReader();
+            List<Group> grpList = new List<Group>();
+            while (reader.Read())
+            {
+                IDataRecord rcd = reader;
+                grpList.Add(new Group((int)rcd[0], (string)rcd[1], (string)rcd[2], cat));
+            }
+            con.Close();
+            return grpList;
+        }
+
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>

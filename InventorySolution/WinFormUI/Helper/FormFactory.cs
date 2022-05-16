@@ -115,24 +115,24 @@ namespace WinFormUI.Helper
                     break;
                 case FormMode.Edit:
                     throw new NotImplementedException();
-                    break;
+                    
                 case FormMode.View:
                     throw new NotImplementedException();
-                    break;
+                    
                 case FormMode.Delete:
                     throw new NotImplementedException();
-                    break;
+                    
                 default:
                     throw new ArgumentException("Invalid value for mode parameter");
-                    break;
+                    
             }
             return f;
         }
 
         public static Form MakeGpnForm(
-            string title = "Generic product Name",
-            string addButtonText = "Add",
-            bool[] canEditFields = null
+            FormMode mode,
+            string title = "Group",
+            string addButtonText = "Add"
         )
         {
             GpnForm f = new GpnForm();
@@ -140,16 +140,25 @@ namespace WinFormUI.Helper
             System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
 
-            if (canEditFields.Length == 5)
+            switch (mode)
             {
-                EnableControl("cmbCategoryName", f, canEditFields[0]);
-                EnableControl("cmbGroupName", f, canEditFields[1]);
-                EnableControl("txtGpnID", f, canEditFields[2]);
-                EnableControl("txtGpnName", f, canEditFields[3]);
-                EnableControl("txtGpnDescription", f, canEditFields[4]);
-                
+                case FormMode.New:
+                    EnableControl("cmbCategoryName", f, true);
+                    EnableControl("cmbGroupName", f, true);
+                    EnableControl("txtGpnID", f, false);
+                    EnableControl("txtGpnName", f, true);
+                    EnableControl("txtGpnDescription", f, true);
+                    break;
+                case FormMode.Edit:
+                    throw new NotImplementedException();
+                case FormMode.View:
+                    throw new NotImplementedException();
+                case FormMode.Delete:
+                    throw new NotImplementedException();
+                default:
+                    throw new NotImplementedException();
             }
-
+            
             return f;
         }
 

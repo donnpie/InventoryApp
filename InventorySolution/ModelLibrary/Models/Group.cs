@@ -23,5 +23,12 @@ namespace ModelLibrary.Models
 
         public Group(string name, string description) : base(name, description) 
         { Category = null; }
+
+        public override void Print()
+        {
+            base.Print();
+            Console.WriteLine("Category:");
+            Category.Print();
+        }
     }
 }

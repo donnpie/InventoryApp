@@ -43,9 +43,9 @@ namespace WinFormUI.Forms
         private void genericProductNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeGpnForm(
+                FormMode.New,
                 "Add new Generic Product Name",
-                "Add",
-                new bool[] { false, false, false, false, false }
+                "Add"
             );
             f.Show();
         }

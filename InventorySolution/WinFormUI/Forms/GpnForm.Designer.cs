@@ -58,6 +58,7 @@ namespace WinFormUI.Forms
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // grpCategory
             // 
@@ -86,6 +87,7 @@ namespace WinFormUI.Forms
             this.cmbCategoryName.Name = "cmbCategoryName";
             this.cmbCategoryName.Size = new System.Drawing.Size(174, 21);
             this.cmbCategoryName.TabIndex = 0;
+            this.cmbCategoryName.SelectionChangeCommitted += new System.EventHandler(this.cmbCategoryName_SelectionChangeCommitted);
             // 
             // btnClose
             // 
@@ -104,6 +106,7 @@ namespace WinFormUI.Forms
             this.btnAdd.TabIndex = 16;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // grpGpn
             // 
@@ -197,7 +200,7 @@ namespace WinFormUI.Forms
             this.cmbGroupName.Size = new System.Drawing.Size(174, 21);
             this.cmbGroupName.TabIndex = 0;
             // 
-            // SpnForm
+            // GpnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,7 +211,7 @@ namespace WinFormUI.Forms
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.grpGpn);
-            this.Name = "SpnForm";
+            this.Name = "GpnForm";
             this.Text = "Generic Product Name";
             this.grpCategory.ResumeLayout(false);
             this.grpCategory.PerformLayout();

@@ -24,6 +24,13 @@ namespace ConsoleUI
             //Queries.SearchCategoryByIdReturnCategory(conStr, "1");
             Category cat = Queries.SearchCategoryByIdReturnCategory(conStr, "1");
             cat.Print();
+            Console.WriteLine();
+
+            Group grp = new Group(1, "group", "description", cat);
+            grp.Print();
+
+            GenericProductName gpn = new GenericProductName(1, "gpn", grp);
+            gpn.Print();
             
 
 
