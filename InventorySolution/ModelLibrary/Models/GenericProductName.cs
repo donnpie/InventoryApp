@@ -35,10 +35,10 @@ namespace ModelLibrary.Models
 
         public Group Group { get; private set; }
 
-        public GenericProductName(int id, string gpn, Group group)
+        public GenericProductName(int id, string name, Group group)
         {
             Id = id;
-            Name = gpn;
+            Name = name;
             Group = group;
         }
 

@@ -36,8 +36,6 @@ namespace WinFormUI.Forms
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.grpGpn = new System.Windows.Forms.GroupBox();
-            this.txtGpnDescription = new System.Windows.Forms.TextBox();
-            this.lblDescription = new System.Windows.Forms.Label();
             this.txtGpnName = new System.Windows.Forms.TextBox();
             this.lblGroupName = new System.Windows.Forms.Label();
             this.txtGpnID = new System.Windows.Forms.TextBox();
@@ -52,7 +50,7 @@ namespace WinFormUI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(22, 379);
+            this.btnCancel.Location = new System.Drawing.Point(25, 302);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 14;
@@ -91,16 +89,17 @@ namespace WinFormUI.Forms
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(225, 379);
+            this.btnClose.Location = new System.Drawing.Point(228, 302);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(93, 23);
             this.btnClose.TabIndex = 15;
             this.btnClose.Text = "Add and close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(121, 379);
+            this.btnAdd.Location = new System.Drawing.Point(124, 302);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 16;
@@ -110,35 +109,16 @@ namespace WinFormUI.Forms
             // 
             // grpGpn
             // 
-            this.grpGpn.Controls.Add(this.txtGpnDescription);
-            this.grpGpn.Controls.Add(this.lblDescription);
             this.grpGpn.Controls.Add(this.txtGpnName);
             this.grpGpn.Controls.Add(this.lblGroupName);
             this.grpGpn.Controls.Add(this.txtGpnID);
             this.grpGpn.Controls.Add(this.lblID);
             this.grpGpn.Location = new System.Drawing.Point(23, 183);
             this.grpGpn.Name = "grpGpn";
-            this.grpGpn.Size = new System.Drawing.Size(296, 181);
+            this.grpGpn.Size = new System.Drawing.Size(296, 101);
             this.grpGpn.TabIndex = 17;
             this.grpGpn.TabStop = false;
             this.grpGpn.Text = "Generic Product Name";
-            // 
-            // txtGpnDescription
-            // 
-            this.txtGpnDescription.Location = new System.Drawing.Point(90, 95);
-            this.txtGpnDescription.Multiline = true;
-            this.txtGpnDescription.Name = "txtGpnDescription";
-            this.txtGpnDescription.Size = new System.Drawing.Size(174, 67);
-            this.txtGpnDescription.TabIndex = 7;
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(14, 98);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(60, 13);
-            this.lblDescription.TabIndex = 4;
-            this.lblDescription.Text = "Description";
             // 
             // txtGpnName
             // 
@@ -146,6 +126,7 @@ namespace WinFormUI.Forms
             this.txtGpnName.Name = "txtGpnName";
             this.txtGpnName.Size = new System.Drawing.Size(174, 20);
             this.txtGpnName.TabIndex = 8;
+            this.txtGpnName.TextChanged += new System.EventHandler(this.txtGpnName_TextChanged);
             // 
             // lblGroupName
             // 
@@ -199,12 +180,13 @@ namespace WinFormUI.Forms
             this.cmbGroupName.Name = "cmbGroupName";
             this.cmbGroupName.Size = new System.Drawing.Size(174, 21);
             this.cmbGroupName.TabIndex = 0;
+            this.cmbGroupName.SelectionChangeCommitted += new System.EventHandler(this.cmbGroupName_SelectionChangeCommitted);
             // 
             // GpnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 450);
+            this.ClientSize = new System.Drawing.Size(353, 352);
             this.Controls.Add(this.grpGroup);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpCategory);
@@ -232,8 +214,6 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox grpGpn;
-        private System.Windows.Forms.TextBox txtGpnDescription;
-        private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.TextBox txtGpnName;
         private System.Windows.Forms.Label lblGroupName;
         private System.Windows.Forms.TextBox txtGpnID;

@@ -398,6 +398,16 @@ namespace SqlLibrary.Queries
             return InsertIntoTable(conStr, query);
         }
 
+        public static bool InsertGpn(string conStr, GenericProductName gpn)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (gpn is null) { return false; }
+            if (gpn.Group.Id == 0) { return false; }
+            string query = $"EXEC SpInsertGenericProductName '{gpn.Name}', '', {gpn.Group.Id}";
+
+            return InsertIntoTable(conStr, query);
+        }
+
 
         #endregion
 

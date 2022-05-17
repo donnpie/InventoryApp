@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormUI.Helper;
 
 namespace WinFormUI.Forms
 {
@@ -22,18 +23,80 @@ namespace WinFormUI.Forms
         public GpnForm()
         {
             InitializeComponent();
-            //this.Name = "Add new Generic Product Name";
-            //cmbCategoryName.Enabled = true;
-            //cmbGroupName.Enabled = true;
-
             conStr = Helper.ConfigInfo.GetConString("ConString");
             catList = Queries.SearchCategoryAllReturnCategoryList(conStr);
+            PopulateCategoryComboBox(cmbCategoryName, catList);
             selectedCategory = catList[0];
-            cmbCategoryName.DataSource = catList;
-            cmbCategoryName.ValueMember = "Id";
-            cmbCategoryName.DisplayMember = "Name";
-            //this.Show();
-           
+
+            groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
+            if (groupList.Count > 0)
+            {
+                PopulateGroupComboBox(cmbGroupName, groupList);
+                selectedGroup = groupList[0];
+                //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
+            }
+
+        }
+
+        private void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
+        {
+            cmb.DataSource = catList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
+
+        private void PopulateGroupComboBox(ComboBox cmb, List<Group> groupList)
+        {
+            cmb.DataSource = groupList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
+
+
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+            if (selectedCategory is null)
+            {
+                Utils.MessageBoxError("Please select a valid category");
+                return;
+            }
+            if (selectedGroup is null)
+            {
+                Utils.MessageBoxError("Please select a valid group");
+                return;
+            }
+            string name = txtGpnName.Text;
+            if (Utils.TextBoxValueIsNullOrEmpty(txtGpnName, "Generic product name"))
+            {
+                txtGpnName.BackColor = Color.Pink;
+                return;
+            }
+            GenericProductName gpn = new GenericProductName(0, name, selectedGroup);
+            bool result = Queries.InsertGpn(conStr, gpn);
+            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert - possible duplicate");
+        }
+
+        private void cmbCategoryName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            selectedCategory = cmbCategoryName.SelectedItem as Category;
+            groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
+            PopulateGroupComboBox(cmbGroupName, groupList);
+            if (groupList.Count > 0)
+            {
+                selectedGroup = groupList[0];
+            }
+            else
+            {
+                selectedGroup = null;
+                cmbGroupName.ResetText();
+            }
+        }
+
+        private void cmbGroupName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            selectedGroup = cmbGroupName.SelectedItem as Group;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -41,24 +104,14 @@ namespace WinFormUI.Forms
             Close();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{cmbCategoryName.Enabled.ToString()}");
+            MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
         }
 
-        private void cmbCategoryName_SelectionChangeCommitted(object sender, EventArgs e)
+        private void txtGpnName_TextChanged(object sender, EventArgs e)
         {
-            selectedCategory = cmbCategoryName.SelectedItem as Category;
-            groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
-            if (groupList.Count > 0)
-            {
-                cmbGroupName.DataSource = groupList;
-                cmbGroupName.ValueMember = "Id";
-                cmbGroupName.DisplayMember = "Name";
-                selectedGroup = groupList[0];
-                //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
-            }
-                
+            ((TextBox)sender).BackColor = Color.White;
         }
     }
 }

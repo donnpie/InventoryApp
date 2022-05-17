@@ -147,7 +147,7 @@ namespace WinFormUI.Helper
                     EnableControl("cmbGroupName", f, true);
                     EnableControl("txtGpnID", f, false);
                     EnableControl("txtGpnName", f, true);
-                    EnableControl("txtGpnDescription", f, true);
+                    //EnableControl("txtGpnDescription", f, true);
                     break;
                 case FormMode.Edit:
                     throw new NotImplementedException();
