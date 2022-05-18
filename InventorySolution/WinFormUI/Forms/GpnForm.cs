@@ -25,32 +25,31 @@ namespace WinFormUI.Forms
             InitializeComponent();
             conStr = Helper.ConfigInfo.GetConString("ConString");
             catList = Queries.SearchCategoryAllReturnCategoryList(conStr);
-            PopulateCategoryComboBox(cmbCategoryName, catList);
+            Utils.PopulateCategoryComboBox(cmbCategoryName, catList);
             selectedCategory = catList[0];
 
             groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
             if (groupList.Count > 0)
             {
-                PopulateGroupComboBox(cmbGroupName, groupList);
+                Utils.PopulateGroupComboBox(cmbGroupName, groupList);
                 selectedGroup = groupList[0];
                 //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
             }
 
         }
+        //private void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
+        //{
+        //    cmb.DataSource = catList;
+        //    cmb.ValueMember = "Id";
+        //    cmb.DisplayMember = "Name";
+        //}
 
-        private void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
-        {
-            cmb.DataSource = catList;
-            cmb.ValueMember = "Id";
-            cmb.DisplayMember = "Name";
-        }
-
-        private void PopulateGroupComboBox(ComboBox cmb, List<Group> groupList)
-        {
-            cmb.DataSource = groupList;
-            cmb.ValueMember = "Id";
-            cmb.DisplayMember = "Name";
-        }
+        //private void PopulateGroupComboBox(ComboBox cmb, List<Group> groupList)
+        //{
+        //    cmb.DataSource = groupList;
+        //    cmb.ValueMember = "Id";
+        //    cmb.DisplayMember = "Name";
+        //}
 
 
 
@@ -82,7 +81,7 @@ namespace WinFormUI.Forms
         {
             selectedCategory = cmbCategoryName.SelectedItem as Category;
             groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
-            PopulateGroupComboBox(cmbGroupName, groupList);
+            Utils.PopulateGroupComboBox(cmbGroupName, groupList);
             if (groupList.Count > 0)
             {
                 selectedGroup = groupList[0];

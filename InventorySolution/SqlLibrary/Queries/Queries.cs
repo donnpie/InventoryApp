@@ -86,6 +86,30 @@ namespace SqlLibrary.Queries
 
             return list;
         }
+        
+        private static List<Brand> SearchBrandTableAllReturnBrandList(string conStr, string storedProcedureName)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return null; }
+            string query = $"EXEC {storedProcedureName}";
+            return CreateBrandList(conStr, query);
+        }
+
+        private static List<Brand> CreateBrandList(string conStr, string query)
+        {
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            var list = new List<Brand>();
+            while (reader.Read())
+            {
+                IDataRecord rcd = (IDataRecord)reader;
+                list.Add(new Brand((int)rcd[0], (string)rcd[1], (string)rcd[2]));
+            }
+            conn.Close();
+
+            return list;
+        }
 
         private static bool InsertIntoTable(string conStr, string query)
         {
@@ -158,6 +182,23 @@ namespace SqlLibrary.Queries
             return grpList;
         }
 
+        
+        public static List<GenericProductName> SearchGpnByGroupID(string conStr, Group group)
+        {
+            SqlConnection con = new SqlConnection(conStr);
+            string query = $"EXEC SpSelectGenericProductNameByGroupId {group.Id}";
+            SqlCommand com = new SqlCommand(query, con);
+            con.Open();
+            SqlDataReader reader = com.ExecuteReader();
+            List<GenericProductName> gpnList = new List<GenericProductName>();
+            while (reader.Read())
+            {
+                IDataRecord rcd = reader;
+                gpnList.Add(new GenericProductName((int)rcd[0], (string)rcd[1], group));
+            }
+            con.Close();
+            return gpnList;
+        }
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -339,6 +380,12 @@ namespace SqlLibrary.Queries
         public static DataTable SearchBrandAll(string conStr)
         {
             return SearchTableAllReturnDataTable(conStr, "SpSelectBrandAll");
+        }
+
+        
+        public static List<Brand> SearchBrandAllReturnBrandList(string conStr)
+        {
+            return SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
         }
 
         /// <summary>

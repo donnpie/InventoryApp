@@ -47,7 +47,9 @@ namespace WinFormUI.Forms
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.txtBarcode = new System.Windows.Forms.TextBox();
             this.txtProductID = new System.Windows.Forms.TextBox();
+            this.lblBarcode = new System.Windows.Forms.Label();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.lblProductID = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,8 +58,6 @@ namespace WinFormUI.Forms
             this.grpBrand = new System.Windows.Forms.GroupBox();
             this.lblBrand = new System.Windows.Forms.Label();
             this.cmbBrandName = new System.Windows.Forms.ComboBox();
-            this.lblBarcode = new System.Windows.Forms.Label();
-            this.txtBarcode = new System.Windows.Forms.TextBox();
             this.grpGroup.SuspendLayout();
             this.grpCategory.SuspendLayout();
             this.grpProduct.SuspendLayout();
@@ -93,6 +93,7 @@ namespace WinFormUI.Forms
             this.cmbGroupName.Name = "cmbGroupName";
             this.cmbGroupName.Size = new System.Drawing.Size(174, 21);
             this.cmbGroupName.TabIndex = 0;
+            this.cmbGroupName.SelectionChangeCommitted += new System.EventHandler(this.cmbGroupName_SelectionChangeCommitted);
             // 
             // btnCancel
             // 
@@ -102,6 +103,7 @@ namespace WinFormUI.Forms
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // grpCategory
             // 
@@ -130,6 +132,7 @@ namespace WinFormUI.Forms
             this.cmbCategoryName.Name = "cmbCategoryName";
             this.cmbCategoryName.Size = new System.Drawing.Size(174, 21);
             this.cmbCategoryName.TabIndex = 0;
+            this.cmbCategoryName.SelectionChangeCommitted += new System.EventHandler(this.cmbCategoryName_SelectionChangeCommitted);
             // 
             // btnClose
             // 
@@ -237,12 +240,28 @@ namespace WinFormUI.Forms
             this.txtFilePath.Size = new System.Drawing.Size(142, 20);
             this.txtFilePath.TabIndex = 9;
             // 
+            // txtBarcode
+            // 
+            this.txtBarcode.Location = new System.Drawing.Point(90, 60);
+            this.txtBarcode.Name = "txtBarcode";
+            this.txtBarcode.Size = new System.Drawing.Size(174, 20);
+            this.txtBarcode.TabIndex = 9;
+            // 
             // txtProductID
             // 
             this.txtProductID.Location = new System.Drawing.Point(90, 23);
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.Size = new System.Drawing.Size(174, 20);
             this.txtProductID.TabIndex = 9;
+            // 
+            // lblBarcode
+            // 
+            this.lblBarcode.AutoSize = true;
+            this.lblBarcode.Location = new System.Drawing.Point(14, 63);
+            this.lblBarcode.Name = "lblBarcode";
+            this.lblBarcode.Size = new System.Drawing.Size(47, 13);
+            this.lblBarcode.TabIndex = 6;
+            this.lblBarcode.Text = "Barcode";
             // 
             // lblFilePath
             // 
@@ -317,22 +336,6 @@ namespace WinFormUI.Forms
             this.cmbBrandName.Name = "cmbBrandName";
             this.cmbBrandName.Size = new System.Drawing.Size(174, 21);
             this.cmbBrandName.TabIndex = 0;
-            // 
-            // lblBarcode
-            // 
-            this.lblBarcode.AutoSize = true;
-            this.lblBarcode.Location = new System.Drawing.Point(14, 63);
-            this.lblBarcode.Name = "lblBarcode";
-            this.lblBarcode.Size = new System.Drawing.Size(47, 13);
-            this.lblBarcode.TabIndex = 6;
-            this.lblBarcode.Text = "Barcode";
-            // 
-            // txtBarcode
-            // 
-            this.txtBarcode.Location = new System.Drawing.Point(90, 60);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(174, 20);
-            this.txtBarcode.TabIndex = 9;
             // 
             // ProductForm
             // 

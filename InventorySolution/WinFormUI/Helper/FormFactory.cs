@@ -96,8 +96,7 @@ namespace WinFormUI.Helper
         public static Form MakeGroupForm(
             FormMode mode,
             string title = "Group",
-            string addButtonText = "Add"
-            
+            string addButtonText = "Add"           
         )
         {
             GroupForm f = new GroupForm(mode);
@@ -163,9 +162,9 @@ namespace WinFormUI.Helper
         }
 
         public static Form MakeProductForm(
+            FormMode mode,
             string title = "Product",
-            string addButtonText = "Add",
-            bool[] canEditFields = null
+            string addButtonText = "Add"
         )
         {
             ProductForm f = new ProductForm();
@@ -173,19 +172,30 @@ namespace WinFormUI.Helper
             System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
 
-            if (canEditFields.Length == 10)
+            switch (mode)
             {
-                EnableControl("cmbCategoryName", f, canEditFields[0]);
-                EnableControl("cmbGroupName", f, canEditFields[1]);
-                EnableControl("cmbGpnName", f, canEditFields[2]);
-                EnableControl("cmbBrandName", f, canEditFields[3]);
-                EnableControl("txtProductID", f, canEditFields[4]);
-                EnableControl("txtBarcode", f, canEditFields[5]);
-                EnableControl("txtProductName", f, canEditFields[6]);
-                EnableControl("txtProductComments", f, canEditFields[7]);
-                EnableControl("txtFilePath", f, canEditFields[8]);
-                EnableControl("btnBrowseFileName", f, canEditFields[9]);
+                case FormMode.New:
+                    EnableControl("cmbCategoryName", f, true);
+                    EnableControl("cmbGroupName", f, true);
+                    EnableControl("cmbGpnName", f, true);
+                    EnableControl("cmbBrandName", f, true);
+                    EnableControl("txtProductID", f, true);
+                    EnableControl("txtBarcode", f, true);
+                    EnableControl("txtProductName", f, true);
+                    EnableControl("txtProductComments", f, true);
+                    EnableControl("txtFilePath", f, true);
+                    EnableControl("btnBrowseFileName", f, true);
+                    break;
+                case FormMode.Edit:
+                    break;
+                case FormMode.View:
+                    break;
+                case FormMode.Delete:
+                    break;
+                default:
+                    break;
             }
+
             return f;
         }
 

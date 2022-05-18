@@ -75,9 +75,9 @@ namespace WinFormUI.Forms
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = FormFactory.MakeProductForm(
+                FormMode.New,
                 "Add new Product",
-                "Add",
-                new bool[] { false, false, false, false, false, false, false, false, false, false }
+                "Add"
             );
             f.Show();
         }

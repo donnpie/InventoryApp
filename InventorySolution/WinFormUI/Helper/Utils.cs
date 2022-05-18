@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModelLibrary.Models;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace WinFormUI.Helper
@@ -60,6 +62,34 @@ namespace WinFormUI.Helper
                 , MessageBoxButtons.OK
                 , MessageBoxIcon.Error
             );
+        }
+
+        public static void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
+        {
+            cmb.DataSource = catList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
+
+        public static void PopulateGroupComboBox(ComboBox cmb, List<Group> groupList)
+        {
+            cmb.DataSource = groupList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
+        
+        public static void PopulateGpnComboBox(ComboBox cmb, List<GenericProductName> gpnList)
+        {
+            cmb.DataSource = gpnList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
+        
+        public static void PopulateGroupComboBox(ComboBox cmb, List<Brand> brandList)
+        {
+            cmb.DataSource = brandList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
         }
     }
 }
