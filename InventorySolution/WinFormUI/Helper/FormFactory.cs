@@ -179,7 +179,7 @@ namespace WinFormUI.Helper
                     EnableControl("cmbGroupName", f, true);
                     EnableControl("cmbGpnName", f, true);
                     EnableControl("cmbBrandName", f, true);
-                    EnableControl("txtProductID", f, true);
+                    EnableControl("txtProductID", f, false);
                     EnableControl("txtBarcode", f, true);
                     EnableControl("txtProductName", f, true);
                     EnableControl("txtProductComments", f, true);

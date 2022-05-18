@@ -455,6 +455,17 @@ namespace SqlLibrary.Queries
             return InsertIntoTable(conStr, query);
         }
 
+        public static bool InsertProduct(string conStr, Product prod)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (prod is null) { return false; }
+            if (prod.Gpn.Id == 0) { return false; }
+            if (prod.Brand.Id == 0) { return false; }
+            string query = $"EXEC SpInsertProduct '{prod.Barcode}', {prod.Gpn.Id}, '{prod.Brand.Id}', '{prod.Name}', '{prod.Comments}', '{prod.ImageFileName}'";
+
+            return InsertIntoTable(conStr, query);
+        }
+
 
         #endregion
 

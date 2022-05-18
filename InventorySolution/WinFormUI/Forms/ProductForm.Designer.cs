@@ -29,6 +29,7 @@ namespace WinFormUI.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grpGroup = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbGroupName = new System.Windows.Forms.ComboBox();
@@ -58,6 +59,7 @@ namespace WinFormUI.Forms
             this.grpBrand = new System.Windows.Forms.GroupBox();
             this.lblBrand = new System.Windows.Forms.Label();
             this.cmbBrandName = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.grpGroup.SuspendLayout();
             this.grpCategory.SuspendLayout();
             this.grpProduct.SuspendLayout();
@@ -151,6 +153,7 @@ namespace WinFormUI.Forms
             this.btnAdd.TabIndex = 22;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // grpProduct
             // 
@@ -223,6 +226,7 @@ namespace WinFormUI.Forms
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(174, 20);
             this.txtProductName.TabIndex = 8;
+            this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
             // 
             // lblProductName
             // 
@@ -232,6 +236,7 @@ namespace WinFormUI.Forms
             this.lblProductName.Size = new System.Drawing.Size(35, 13);
             this.lblProductName.TabIndex = 5;
             this.lblProductName.Text = "Name";
+            this.toolTip1.SetToolTip(this.lblProductName, "Product trade name");
             // 
             // txtFilePath
             // 
@@ -246,6 +251,7 @@ namespace WinFormUI.Forms
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(174, 20);
             this.txtBarcode.TabIndex = 9;
+            this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             // 
             // txtProductID
             // 
@@ -398,5 +404,6 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.Button btnBrowseFileName;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label lblBarcode;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

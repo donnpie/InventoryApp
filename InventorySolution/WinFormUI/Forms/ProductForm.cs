@@ -2,6 +2,7 @@
 using SqlLibrary.Queries;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -107,6 +108,58 @@ namespace WinFormUI.Forms
                 selectedGpn = null;
                 cmbGpnName.ResetText();
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (selectedCategory is null)
+            {
+                Utils.MessageBoxError("Please select a valid category");
+                return;
+            }
+            if (selectedGroup is null)
+            {
+                Utils.MessageBoxError("Please select a valid group");
+                return;
+            }
+            if (selectedGpn is null)
+            {
+                Utils.MessageBoxError("Please select a valid generic product name");
+                return;
+            }
+            if (selectedBrand is null)
+            {
+                Utils.MessageBoxError("Please select a valid brand");
+                return;
+            }
+            string name = txtProductName.Text;
+            if (Utils.TextBoxValueIsNullOrEmpty(txtProductName, "Product name"))
+            {
+                txtProductName.BackColor = Color.Pink;
+                return;
+            }
+            string barcode = txtBarcode.Text;
+            if (Utils.TextBoxValueIsNullOrEmpty(txtBarcode, "Barcode"))
+            {
+                txtBarcode.BackColor = Color.Pink;
+                return;
+            }
+            string comments = txtProductComments.Text;
+            string imageFileName = txtFilePath.Text;
+
+            Product prod = new Product(name, barcode, comments, imageFileName, selectedGpn, selectedBrand);
+            bool result = Queries.InsertProduct(conStr, prod);
+            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert - possible duplicate");
+        }
+
+        private void txtBarcode_TextChanged(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
+        }
+
+        private void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
         }
     }
 }
