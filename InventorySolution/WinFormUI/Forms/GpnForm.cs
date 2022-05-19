@@ -33,10 +33,9 @@ namespace WinFormUI.Forms
             {
                 Utils.PopulateGroupComboBox(cmbGroupName, groupList);
                 selectedGroup = groupList[0];
-                //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
             }
-
         }
+
         //private void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
         //{
         //    cmb.DataSource = catList;
@@ -50,8 +49,6 @@ namespace WinFormUI.Forms
         //    cmb.ValueMember = "Id";
         //    cmb.DisplayMember = "Name";
         //}
-
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -105,7 +102,7 @@ namespace WinFormUI.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
+            this.Close();
         }
 
         private void txtGpnName_TextChanged(object sender, EventArgs e)

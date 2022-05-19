@@ -119,10 +119,15 @@ namespace WinFormUI.Forms
                     throw new NotImplementedException();
                     break;
             }
-            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert");
+            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert - possible duplicate");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }

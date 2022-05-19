@@ -14,6 +14,7 @@ namespace WinFormUI.Forms
         readonly FormMode mode;
         //List<string> values;
         Category selectedCategory;
+
         public GroupForm(FormMode mode)
         {
             InitializeComponent();
@@ -70,23 +71,13 @@ namespace WinFormUI.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (selectedCategory is null) return;
-            string name = txtName.Text;
-            if (Utils.TextBoxValueIsNullOrEmpty(txtName, "Name")) return;
-            txtName.BackColor = System.Drawing.Color.White;
-            string description = txtDescription.Text;
-
-            Group group = new Group(name, description, selectedCategory);
-            bool result = Queries.InsertGroup(conStr, group);
-            if (result) MessageBox.Show("Inserted succesfully"); else MessageBox.Show("Failed to insert - possible duplicate");
-            this.Close();
+          this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
 
         //private void cmbCategoryName_SelectedIndexChanged(object sender, EventArgs e)
         //{

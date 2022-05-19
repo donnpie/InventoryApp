@@ -91,5 +91,12 @@ namespace WinFormUI.Helper
             cmb.ValueMember = "Id";
             cmb.DisplayMember = "Name";
         }
+
+        public static void PopulateStoreComboBox(ComboBox cmb, List<Store> storeList)
+        {
+            cmb.DataSource = storeList;
+            cmb.ValueMember = "Id";
+            cmb.DisplayMember = "Name";
+        }
     }
 }

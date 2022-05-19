@@ -26,6 +26,23 @@ namespace WinFormUI.Helper
 
     public static class FormFactory
     {
+        private static void EnableControl(string controlName, Form form, bool enabled)
+        {
+            try
+            {
+                System.Windows.Forms.Control[] c = form.Controls.Find(controlName, true);
+                c[0].Enabled = (c.Length == 1 && enabled);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                MessageBox.Show($"{controlName} is not a valid control name. {e.ToString()}"
+                    , "Error"
+                    , MessageBoxButtons.OK
+                    , MessageBoxIcon.Error
+                );
+            }
+        }
+
         public static MainForm MakeMainForm(string title = "Invetory App")
         {
             MainForm f = new MainForm();
@@ -33,6 +50,7 @@ namespace WinFormUI.Helper
             return f;
         }
 
+        #region Category Form
         public static Form MakeCategoryForm(
             FormMode mode,
             Table table,
@@ -76,23 +94,21 @@ namespace WinFormUI.Helper
             return f;
         }
 
-        private static void EnableControl(string controlName, Form form, bool enabled)
+        public static Form MakeNewCategoryForm()
         {
-            try
-            {
-                System.Windows.Forms.Control[] c = form.Controls.Find(controlName, true);
-                c[0].Enabled = (c.Length == 1 && enabled);
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                MessageBox.Show($"{controlName} is not a valid control name. {e.ToString()}"
-                    , "Error"
-                    , MessageBoxButtons.OK
-                    , MessageBoxIcon.Error
-                );
-            }
+            Form f = MakeCategoryForm(
+                FormMode.New,
+                Table.Category,
+                "Add new Category",
+                "Add"
+            );
+            return f;
         }
 
+        #endregion
+
+
+        #region Group Form
         public static Form MakeGroupForm(
             FormMode mode,
             string title = "Group",
@@ -128,6 +144,19 @@ namespace WinFormUI.Helper
             return f;
         }
 
+        public static Form MakeNewGroupForm()
+        {
+            Form f = MakeGroupForm(
+                FormMode.New,
+                "Add new Group",
+                "Add"
+            );
+            return f;
+        }
+
+        #endregion
+
+        #region Generic Product Name Form
         public static Form MakeGpnForm(
             FormMode mode,
             string title = "Group",
@@ -161,6 +190,19 @@ namespace WinFormUI.Helper
             return f;
         }
 
+        public static Form MakeNewGpnForm()
+        {
+            Form f = FormFactory.MakeGpnForm(
+                FormMode.New,
+                "Add new Generic Product Name",
+                "Add"
+            );
+            return f;
+        }
+
+        #endregion
+
+        #region Product Form
         public static Form MakeProductForm(
             FormMode mode,
             string title = "Product",
@@ -199,10 +241,47 @@ namespace WinFormUI.Helper
             return f;
         }
 
+        public static Form MakeNewProductForm()
+        {
+            Form f = FormFactory.MakeProductForm(
+                FormMode.New,
+                "Add new Product",
+                "Add"
+            );
+            return f;
+        }
+        #endregion
+
+        #region Brand Form
+        public static Form MakeNewBrandForm()
+        {
+            Form f = MakeCategoryForm(
+                FormMode.New,
+                Table.Brand,
+                "Add new Brand",
+                "Add"
+            );
+            return f;
+        }
+        #endregion
+
+        #region Store Form
+        public static Form MakeNewStoreForm()
+        {
+            Form f = MakeCategoryForm(
+                FormMode.New,
+                Table.Store,
+                "Add new Store",
+                "Add"
+            );
+            return f;
+        }
+
+        #endregion
+
         public static Form MakeStockInForm(
-            string title = "Stock In",
-            string addButtonText = "Add",
-            bool[] canEditFields = null
+            string title = "Scan in stock",
+            string addButtonText = "Add"
         )
         {
             StockInForm f = new StockInForm();
@@ -210,23 +289,23 @@ namespace WinFormUI.Helper
             System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
 
-            if (canEditFields.Length == 11)
-            {
-                EnableControl("txtCategoryName", f, canEditFields[0]);
-                EnableControl("txtGroupName", f, canEditFields[1]);
-                EnableControl("txtGpnName", f, canEditFields[2]);
-                EnableControl("txtBrandName", f, canEditFields[3]);
-                EnableControl("cmbStoreName", f, canEditFields[4]);
-                EnableControl("txtProductID", f, canEditFields[5]);
-                EnableControl("txtBarcode", f, canEditFields[6]);
-                EnableControl("txtProductName", f, canEditFields[7]);
-                EnableControl("txtProductComments", f, canEditFields[8]);
-                EnableControl("txtPrice", f, canEditFields[9]);
-                EnableControl("txtTimestamp", f, canEditFields[10]);
-            }
+            EnableControl("txtCategoryName", f, false);
+            EnableControl("txtGroupName", f, false);
+            EnableControl("txtGpnName", f, false);
+            EnableControl("txtBrandName", f, false);
+            EnableControl("cmbStoreName", f, true);
+            EnableControl("txtProductID", f, false);
+            EnableControl("txtBarcode", f, true);
+            EnableControl("txtProductName", f, false);
+            EnableControl("txtProductComments", f, false);
+            EnableControl("txtPrice", f, true);
+            EnableControl("txtDate", f, false);
+            EnableControl("txtQuantity", f, true);
+
             return f;
         }
 
+        
         public static Form MakeStockOutForm(
             string title = "Stock Out",
             string addButtonText = "Add",

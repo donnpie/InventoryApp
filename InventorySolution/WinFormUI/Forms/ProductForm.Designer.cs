@@ -31,10 +31,12 @@ namespace WinFormUI.Forms
         {
             this.components = new System.ComponentModel.Container();
             this.grpGroup = new System.Windows.Forms.GroupBox();
+            this.btnNewGroup = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbGroupName = new System.Windows.Forms.ComboBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.grpCategory = new System.Windows.Forms.GroupBox();
+            this.btnNewCategory = new System.Windows.Forms.Button();
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.cmbCategoryName = new System.Windows.Forms.ComboBox();
             this.btnClose = new System.Windows.Forms.Button();
@@ -54,12 +56,18 @@ namespace WinFormUI.Forms
             this.lblFilePath = new System.Windows.Forms.Label();
             this.lblProductID = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnNewGpn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbGpnName = new System.Windows.Forms.ComboBox();
             this.grpBrand = new System.Windows.Forms.GroupBox();
+            this.btnNewBrand = new System.Windows.Forms.Button();
             this.lblBrand = new System.Windows.Forms.Label();
             this.cmbBrandName = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnRefreshBrand = new System.Windows.Forms.Button();
+            this.btnRefreshGpn = new System.Windows.Forms.Button();
+            this.btnRefreshGroup = new System.Windows.Forms.Button();
+            this.btnRefreshCategory = new System.Windows.Forms.Button();
             this.grpGroup.SuspendLayout();
             this.grpCategory.SuspendLayout();
             this.grpProduct.SuspendLayout();
@@ -70,14 +78,26 @@ namespace WinFormUI.Forms
             // 
             // grpGroup
             // 
+            this.grpGroup.Controls.Add(this.btnRefreshGroup);
+            this.grpGroup.Controls.Add(this.btnNewGroup);
             this.grpGroup.Controls.Add(this.label1);
             this.grpGroup.Controls.Add(this.cmbGroupName);
-            this.grpGroup.Location = new System.Drawing.Point(26, 103);
+            this.grpGroup.Location = new System.Drawing.Point(26, 114);
             this.grpGroup.Name = "grpGroup";
-            this.grpGroup.Size = new System.Drawing.Size(295, 61);
+            this.grpGroup.Size = new System.Drawing.Size(413, 82);
             this.grpGroup.TabIndex = 25;
             this.grpGroup.TabStop = false;
             this.grpGroup.Text = "Group";
+            // 
+            // btnNewGroup
+            // 
+            this.btnNewGroup.Location = new System.Drawing.Point(282, 20);
+            this.btnNewGroup.Name = "btnNewGroup";
+            this.btnNewGroup.Size = new System.Drawing.Size(117, 21);
+            this.btnNewGroup.TabIndex = 15;
+            this.btnNewGroup.Text = "New Group";
+            this.btnNewGroup.UseVisualStyleBackColor = true;
+            this.btnNewGroup.Click += new System.EventHandler(this.btnNewGroup_Click);
             // 
             // label1
             // 
@@ -99,7 +119,7 @@ namespace WinFormUI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(348, 403);
+            this.btnCancel.Location = new System.Drawing.Point(462, 394);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 20;
@@ -109,14 +129,26 @@ namespace WinFormUI.Forms
             // 
             // grpCategory
             // 
+            this.grpCategory.Controls.Add(this.btnRefreshCategory);
+            this.grpCategory.Controls.Add(this.btnNewCategory);
             this.grpCategory.Controls.Add(this.lblCategoryName);
             this.grpCategory.Controls.Add(this.cmbCategoryName);
             this.grpCategory.Location = new System.Drawing.Point(26, 22);
             this.grpCategory.Name = "grpCategory";
-            this.grpCategory.Size = new System.Drawing.Size(295, 61);
+            this.grpCategory.Size = new System.Drawing.Size(413, 80);
             this.grpCategory.TabIndex = 24;
             this.grpCategory.TabStop = false;
             this.grpCategory.Text = "Category";
+            // 
+            // btnNewCategory
+            // 
+            this.btnNewCategory.Location = new System.Drawing.Point(282, 20);
+            this.btnNewCategory.Name = "btnNewCategory";
+            this.btnNewCategory.Size = new System.Drawing.Size(117, 21);
+            this.btnNewCategory.TabIndex = 15;
+            this.btnNewCategory.Text = "New Category";
+            this.btnNewCategory.UseVisualStyleBackColor = true;
+            this.btnNewCategory.Click += new System.EventHandler(this.btnNewCategory_Click);
             // 
             // lblCategoryName
             // 
@@ -138,16 +170,17 @@ namespace WinFormUI.Forms
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(551, 403);
+            this.btnClose.Location = new System.Drawing.Point(665, 394);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(84, 23);
             this.btnClose.TabIndex = 21;
-            this.btnClose.Text = "Add and close";
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(447, 403);
+            this.btnAdd.Location = new System.Drawing.Point(561, 394);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 22;
@@ -170,7 +203,7 @@ namespace WinFormUI.Forms
             this.grpProduct.Controls.Add(this.lblBarcode);
             this.grpProduct.Controls.Add(this.lblFilePath);
             this.grpProduct.Controls.Add(this.lblProductID);
-            this.grpProduct.Location = new System.Drawing.Point(347, 31);
+            this.grpProduct.Location = new System.Drawing.Point(461, 22);
             this.grpProduct.Name = "grpProduct";
             this.grpProduct.Size = new System.Drawing.Size(288, 366);
             this.grpProduct.TabIndex = 23;
@@ -289,14 +322,26 @@ namespace WinFormUI.Forms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRefreshGpn);
+            this.groupBox1.Controls.Add(this.btnNewGpn);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cmbGpnName);
-            this.groupBox1.Location = new System.Drawing.Point(26, 181);
+            this.groupBox1.Location = new System.Drawing.Point(26, 213);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(295, 61);
+            this.groupBox1.Size = new System.Drawing.Size(413, 86);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generic Product Name";
+            // 
+            // btnNewGpn
+            // 
+            this.btnNewGpn.Location = new System.Drawing.Point(282, 20);
+            this.btnNewGpn.Name = "btnNewGpn";
+            this.btnNewGpn.Size = new System.Drawing.Size(117, 21);
+            this.btnNewGpn.TabIndex = 15;
+            this.btnNewGpn.Text = "New GPN";
+            this.btnNewGpn.UseVisualStyleBackColor = true;
+            this.btnNewGpn.Click += new System.EventHandler(this.btnNewGpn_Click);
             // 
             // label2
             // 
@@ -314,17 +359,30 @@ namespace WinFormUI.Forms
             this.cmbGpnName.Name = "cmbGpnName";
             this.cmbGpnName.Size = new System.Drawing.Size(174, 21);
             this.cmbGpnName.TabIndex = 0;
+            this.cmbGpnName.SelectionChangeCommitted += new System.EventHandler(this.cmbGpnName_SelectionChangeCommitted);
             // 
             // grpBrand
             // 
+            this.grpBrand.Controls.Add(this.btnRefreshBrand);
+            this.grpBrand.Controls.Add(this.btnNewBrand);
             this.grpBrand.Controls.Add(this.lblBrand);
             this.grpBrand.Controls.Add(this.cmbBrandName);
-            this.grpBrand.Location = new System.Drawing.Point(26, 266);
+            this.grpBrand.Location = new System.Drawing.Point(26, 305);
             this.grpBrand.Name = "grpBrand";
-            this.grpBrand.Size = new System.Drawing.Size(295, 61);
+            this.grpBrand.Size = new System.Drawing.Size(413, 83);
             this.grpBrand.TabIndex = 26;
             this.grpBrand.TabStop = false;
             this.grpBrand.Text = "Brand";
+            // 
+            // btnNewBrand
+            // 
+            this.btnNewBrand.Location = new System.Drawing.Point(282, 20);
+            this.btnNewBrand.Name = "btnNewBrand";
+            this.btnNewBrand.Size = new System.Drawing.Size(117, 21);
+            this.btnNewBrand.TabIndex = 15;
+            this.btnNewBrand.Text = "New Brand";
+            this.btnNewBrand.UseVisualStyleBackColor = true;
+            this.btnNewBrand.Click += new System.EventHandler(this.btnNewBrand_Click);
             // 
             // lblBrand
             // 
@@ -342,12 +400,53 @@ namespace WinFormUI.Forms
             this.cmbBrandName.Name = "cmbBrandName";
             this.cmbBrandName.Size = new System.Drawing.Size(174, 21);
             this.cmbBrandName.TabIndex = 0;
+            this.cmbBrandName.SelectionChangeCommitted += new System.EventHandler(this.cmbBrandName_SelectionChangeCommitted);
+            // 
+            // btnRefreshBrand
+            // 
+            this.btnRefreshBrand.Location = new System.Drawing.Point(282, 47);
+            this.btnRefreshBrand.Name = "btnRefreshBrand";
+            this.btnRefreshBrand.Size = new System.Drawing.Size(117, 21);
+            this.btnRefreshBrand.TabIndex = 15;
+            this.btnRefreshBrand.Text = "Refresh";
+            this.btnRefreshBrand.UseVisualStyleBackColor = true;
+            this.btnRefreshBrand.Click += new System.EventHandler(this.btnRefreshBrand_Click);
+            // 
+            // btnRefreshGpn
+            // 
+            this.btnRefreshGpn.Location = new System.Drawing.Point(282, 47);
+            this.btnRefreshGpn.Name = "btnRefreshGpn";
+            this.btnRefreshGpn.Size = new System.Drawing.Size(117, 21);
+            this.btnRefreshGpn.TabIndex = 15;
+            this.btnRefreshGpn.Text = "Refresh";
+            this.btnRefreshGpn.UseVisualStyleBackColor = true;
+            this.btnRefreshGpn.Click += new System.EventHandler(this.btnRefreshGpn_Click);
+            // 
+            // btnRefreshGroup
+            // 
+            this.btnRefreshGroup.Location = new System.Drawing.Point(282, 47);
+            this.btnRefreshGroup.Name = "btnRefreshGroup";
+            this.btnRefreshGroup.Size = new System.Drawing.Size(117, 21);
+            this.btnRefreshGroup.TabIndex = 15;
+            this.btnRefreshGroup.Text = "Refresh";
+            this.btnRefreshGroup.UseVisualStyleBackColor = true;
+            this.btnRefreshGroup.Click += new System.EventHandler(this.btnRefreshGroup_Click);
+            // 
+            // btnRefreshCategory
+            // 
+            this.btnRefreshCategory.Location = new System.Drawing.Point(282, 47);
+            this.btnRefreshCategory.Name = "btnRefreshCategory";
+            this.btnRefreshCategory.Size = new System.Drawing.Size(117, 21);
+            this.btnRefreshCategory.TabIndex = 15;
+            this.btnRefreshCategory.Text = "Refresh";
+            this.btnRefreshCategory.UseVisualStyleBackColor = true;
+            this.btnRefreshCategory.Click += new System.EventHandler(this.btnRefreshCategory_Click);
             // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 450);
+            this.ClientSize = new System.Drawing.Size(783, 450);
             this.Controls.Add(this.grpBrand);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpGroup);
@@ -405,5 +504,13 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label lblBarcode;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnNewCategory;
+        private System.Windows.Forms.Button btnNewGroup;
+        private System.Windows.Forms.Button btnNewGpn;
+        private System.Windows.Forms.Button btnNewBrand;
+        private System.Windows.Forms.Button btnRefreshGroup;
+        private System.Windows.Forms.Button btnRefreshCategory;
+        private System.Windows.Forms.Button btnRefreshGpn;
+        private System.Windows.Forms.Button btnRefreshBrand;
     }
 }

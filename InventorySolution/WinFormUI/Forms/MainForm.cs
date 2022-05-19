@@ -21,64 +21,37 @@ namespace WinFormUI.Forms
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeCategoryForm(
-                FormMode.New,
-                Table.Category,
-                "Add new Category", 
-                "Add"              
-            );
+            Form f = FormFactory.MakeNewCategoryForm();
             f.Show();
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeGroupForm(
-                FormMode.New,
-                "Add new Group",
-                "Add"
-            );
+            Form f = FormFactory.MakeNewGroupForm();
             f.Show();
         }
 
         private void genericProductNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeGpnForm(
-                FormMode.New,
-                "Add new Generic Product Name",
-                "Add"
-            );
+            Form f = FormFactory.MakeNewGpnForm();
             f.Show();
         }
 
         private void brandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeCategoryForm(
-                FormMode.New,
-                Table.Brand,
-                "Add new Brand",
-                "Add"
-            );
+            Form f = FormFactory.MakeNewBrandForm();
             f.Show();
         }
 
         private void storeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeCategoryForm(
-                FormMode.New,
-                Table.Store,
-                "Add new Store",
-                "Add"
-            );
+            Form f = FormFactory.MakeNewStoreForm();
             f.Show();
         }
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeProductForm(
-                FormMode.New,
-                "Add new Product",
-                "Add"
-            );
+            Form f = FormFactory.MakeNewProductForm();
             f.Show();
         }
 
@@ -86,8 +59,7 @@ namespace WinFormUI.Forms
         {
             Form f = FormFactory.MakeStockInForm(
                 "Check stock in",
-                "Add",
-                new bool[] { false, false, false, false, false, false, false, false, false, false, false }
+                "Add"
             );
             f.Show();
         }     

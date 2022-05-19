@@ -46,15 +46,6 @@ namespace SqlLibrary.Queries
             return CreateDataTable(conStr, query);
         }
 
-        private static DataTable SearchTableByBarcode(string conStr, string barcode, string storedProcedureName)
-        {
-            if (StringIsNullOrEmpty(barcode)) { return null; }
-            if (StringIsNullOrEmpty(conStr)) { return null; }
-            string query = $"EXEC {storedProcedureName} {barcode}";
-
-            return CreateDataTable(conStr, query);
-        }
-
         private static DataTable SearchTableAllReturnDataTable(string conStr, string storedProcedureName)
         {
             if (StringIsNullOrEmpty(conStr)) { return null; }
@@ -63,28 +54,24 @@ namespace SqlLibrary.Queries
             return CreateDataTable(conStr, query);
         }
 
-        private static List<Category> SearchCategoryTableAllReturnCategoryList(string conStr, string storedProcedureName)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return null; }
-            string query = $"EXEC {storedProcedureName}";
-            return CreateCategoryList(conStr, query);
-        }
-
-        private static List<Category> CreateCategoryList(string conStr, string query)
+        private static bool InsertIntoTable(string conStr, string query)
         {
             SqlConnection conn = new SqlConnection(conStr);
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            var list = new List<Category>();
-            while (reader.Read())
+            try
             {
-                IDataRecord rcd = (IDataRecord)reader;
-                list.Add(new Category((int)rcd[0], (string)rcd[1], (string)rcd[2]));
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return (rowsAffected == 1);
             }
-            conn.Close();
-
-            return list;
+            catch (SqlException e)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
         
         private static List<Brand> SearchBrandTableAllReturnBrandList(string conStr, string storedProcedureName)
@@ -111,28 +98,34 @@ namespace SqlLibrary.Queries
             return list;
         }
 
-        private static bool InsertIntoTable(string conStr, string query)
+        
+        #endregion
+
+        #region Catergory queries
+        private static List<Category> SearchCategoryTableAllReturnCategoryList(string conStr, string storedProcedureName)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return null; }
+            string query = $"EXEC {storedProcedureName}";
+            return CreateCategoryList(conStr, query);
+        }
+
+        private static List<Category> CreateCategoryList(string conStr, string query)
         {
             SqlConnection conn = new SqlConnection(conStr);
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
-            try
+            SqlDataReader reader = cmd.ExecuteReader();
+            var list = new List<Category>();
+            while (reader.Read())
             {
-                int rowsAffected = cmd.ExecuteNonQuery();
-                return (rowsAffected == 1);
+                IDataRecord rcd = (IDataRecord)reader;
+                list.Add(new Category((int)rcd[0], (string)rcd[1], (string)rcd[2]));
             }
-            catch (SqlException e)
-            {
-                return false;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-        #endregion
+            conn.Close();
 
-        #region Search by ID
+            return list;
+        }
+
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -152,6 +145,56 @@ namespace SqlLibrary.Queries
 
             List<Category> catList = CreateCategoryList(conStr, query);
             return catList[0];
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static DataTable SearchCategoryByName(string conStr, string name)
+        {
+            return SearchTableByName(conStr, name, "SpSelectCategoryByName");
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <returns></returns>
+        public static DataTable SearchCategoryAllReturnDataTable(string conStr)
+        {
+            return SearchTableAllReturnDataTable(conStr, "SpSelectCategoryAll");
+        }
+
+        public static List<Category> SearchCategoryAllReturnCategoryList(string conStr)
+        {
+            return SearchCategoryTableAllReturnCategoryList(conStr, "SpSelectCategoryAll");
+        }
+
+        #endregion
+
+        #region Group queries
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static DataTable SearchGroupByName(string conStr, string name)
+        {
+            return SearchTableByName(conStr, name, "SpSelectGroupByName");
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <returns></returns>
+        public static DataTable SearchGroupAll(string conStr)
+        {
+            return SearchTableAllReturnDataTable(conStr, "SpSelectGroupAll");
         }
 
         /// <summary>
@@ -181,8 +224,30 @@ namespace SqlLibrary.Queries
             con.Close();
             return grpList;
         }
+        #endregion
 
-        
+        #region Generic Product Name queries
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static DataTable SearchGpnByName(string conStr, string name)
+        {
+            return SearchTableByName(conStr, name, "SpSelectGenericProductNameByName");
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <returns></returns>
+        public static DataTable SearchGpnAll(string conStr)
+        {
+            return SearchTableAllReturnDataTable(conStr, "SpSelectGenericProductNameAll");
+        }
+
         public static List<GenericProductName> SearchGpnByGroupID(string conStr, Group group)
         {
             SqlConnection con = new SqlConnection(conStr);
@@ -199,6 +264,7 @@ namespace SqlLibrary.Queries
             con.Close();
             return gpnList;
         }
+
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -209,86 +275,9 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectGenericProductNameById");
         }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static DataTable SearchProductByID(string conStr, string id)
-        {
-            return SearchTableByID(conStr, id, "SpSelectProductById");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static DataTable SearchBrandByID(string conStr, string id)
-        {
-            return SearchTableByID(conStr, id, "SpSelectBrandById");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static DataTable SearchStoreByID(string conStr, string id)
-        {
-            return SearchTableByID(conStr, id, "SpSelectStoreById");
-        }
         #endregion
 
-        #region Search by Name
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static DataTable SearchCategoryByName(string conStr, string name)
-        {
-            return SearchTableByName(conStr, name, "SpSelectCategoryByName");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static DataTable SearchGroupByName(string conStr, string name)
-        {
-            return SearchTableByName(conStr, name, "SpSelectGroupByName");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static DataTable SearchGpnByName(string conStr, string name)
-        {
-            return SearchTableByName(conStr, name, "SpSelectGenericProductNameByName");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static DataTable SearchProductByName(string conStr, string name)
-        {
-            return SearchTableByName(conStr, name, "SpSelectProductByName");
-        }
-
+        #region Brand queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
         /// </summary>
@@ -301,6 +290,34 @@ namespace SqlLibrary.Queries
         }
 
         /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <returns></returns>
+        public static DataTable SearchBrandAll(string conStr)
+        {
+            return SearchTableAllReturnDataTable(conStr, "SpSelectBrandAll");
+        }
+
+        public static List<Brand> SearchBrandAllReturnBrandList(string conStr)
+        {
+            return SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static DataTable SearchBrandByID(string conStr, string id)
+        {
+            return SearchTableByID(conStr, id, "SpSelectBrandById");
+        }
+        #endregion
+
+        #region Store queries
+        /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
         /// </summary>
         /// <param name="conStr"></param>
@@ -310,10 +327,29 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByName(conStr, name, "SpSelectStoreByName");
         }
-
         #endregion
 
-        #region Search by Barcode
+        #region Product queries
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static DataTable SearchProductByName(string conStr, string name)
+        {
+            return SearchTableByName(conStr, name, "SpSelectProductByName");
+        }
+
+        private static DataTable SearchTableByBarcode(string conStr, string barcode, string storedProcedureName)
+        {
+            if (StringIsNullOrEmpty(barcode)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
+            string query = $"EXEC {storedProcedureName} {barcode}";
+
+            return CreateDataTable(conStr, query);
+        }
+
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Barcode
         /// </summary>
@@ -324,42 +360,37 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByBarcode(conStr, barcode, "SpSelectProductByBarcode");
         }
-        #endregion
 
-        #region Search all
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <returns></returns>
-        public static DataTable SearchCategoryAllReturnDataTable(string conStr)
-        {
-            return SearchTableAllReturnDataTable(conStr, "SpSelectCategoryAll");
+        public static Product SearchProductByBarcodeReturnProduct(string conStr, string barcode)
+        {            
+            if (StringIsNullOrEmpty(barcode)) { return null; }
+            if (StringIsNullOrEmpty(conStr)) { return null; }
+            string query = $"EXEC SpSelectProductByBarcode '{barcode}'";
+
+            List<Product> prodList = CreateProductList(conStr, query);
+            if (prodList.Count == 1) return prodList[0];
+            else return null;
         }
 
-        public static List<Category> SearchCategoryAllReturnCategoryList(string conStr)
+        private static List<Product> CreateProductList(string conStr, string query)
         {
-            return SearchCategoryTableAllReturnCategoryList(conStr, "SpSelectCategoryAll");
-        }
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            var list = new List<Product>();
+            while (reader.Read())
+            {
+                IDataRecord rcd = (IDataRecord)reader;
+                var cat = new Category((int)rcd[5], (string)rcd[6], (string)rcd[7]);
+                var grp = new Group((int)rcd[8], (string)rcd[9], (string)rcd[10], cat);
+                var gpn = new GenericProductName((int)rcd[11], (string)rcd[12], grp);
+                var brand = new Brand((int)rcd[14], (string)rcd[15], (string)rcd[16]);
+                list.Add(new Product(id: (int)rcd[0], name: (string)rcd[2], barcode: (string)rcd[1], comments: (string)rcd[3], imageFilename: (string)rcd[4], gpn, brand));
+            }
+            conn.Close();
 
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <returns></returns>
-        public static DataTable SearchGroupAll(string conStr)
-        {
-            return SearchTableAllReturnDataTable(conStr, "SpSelectGroupAll");
-        }
-
-        /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
-        /// </summary>
-        /// <param name="conStr"></param>
-        /// <returns></returns>
-        public static DataTable SearchGpnAll(string conStr)
-        {
-            return SearchTableAllReturnDataTable(conStr, "SpSelectGenericProductNameAll");
+            return list;
         }
 
         /// <summary>
@@ -373,21 +404,18 @@ namespace SqlLibrary.Queries
         }
 
         /// <summary>
-        /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
         /// <param name="conStr"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public static DataTable SearchBrandAll(string conStr)
+        public static DataTable SearchProductByID(string conStr, string id)
         {
-            return SearchTableAllReturnDataTable(conStr, "SpSelectBrandAll");
+            return SearchTableByID(conStr, id, "SpSelectProductById");
         }
+        #endregion
 
-        
-        public static List<Brand> SearchBrandAllReturnBrandList(string conStr)
-        {
-            return SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
-        }
-
+        #region Store Queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
         /// </summary>
@@ -396,6 +424,46 @@ namespace SqlLibrary.Queries
         public static DataTable SearchStoreAll(string conStr)
         {
             return SearchTableAllReturnDataTable(conStr, "SpSelectStoreAll");
+        }
+
+        public static List<Store> SearchStoreAllReturnStoreList(string conStr)
+        {
+            return SearchStoreTableAllReturnStoreList(conStr, "SpSelectStoreAll");
+        }
+
+        private static List<Store> SearchStoreTableAllReturnStoreList(string conStr, string storedProcedureName)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return null; }
+            string query = $"EXEC {storedProcedureName}";
+            return CreateStoreList(conStr, query);
+        }
+
+        private static List<Store> CreateStoreList(string conStr, string query)
+        {
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            var list = new List<Store>();
+            while (reader.Read())
+            {
+                IDataRecord rcd = (IDataRecord)reader;
+                list.Add(new Store((int)rcd[0], (string)rcd[1], (string)rcd[2]));
+            }
+            conn.Close();
+
+            return list;
+        }
+
+        /// <summary>
+        /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static DataTable SearchStoreByID(string conStr, string id)
+        {
+            return SearchTableByID(conStr, id, "SpSelectStoreById");
         }
         #endregion
 
@@ -465,8 +533,6 @@ namespace SqlLibrary.Queries
 
             return InsertIntoTable(conStr, query);
         }
-
-
         #endregion
 
     }

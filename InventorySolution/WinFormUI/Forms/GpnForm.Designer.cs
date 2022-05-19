@@ -93,7 +93,7 @@ namespace WinFormUI.Forms
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(93, 23);
             this.btnClose.TabIndex = 15;
-            this.btnClose.Text = "Add and close";
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 

@@ -23,44 +23,55 @@ namespace WinFormUI.Forms
         {
             InitializeComponent();
             conStr = Helper.ConfigInfo.GetConString("ConString");
+
+            SearchAndPopulateCategories();
+            SearchAndPopulateGroups();
+            SearchAndPopulateGpns();
+            SearchAndPopulateBrands();
+        }
+
+        private void SearchAndPopulateCategories()
+        {
             catList = Queries.SearchCategoryAllReturnCategoryList(conStr);
             Utils.PopulateCategoryComboBox(cmbCategoryName, catList);
             selectedCategory = catList[0];
+        }
 
+        private void SearchAndPopulateGroups()
+        {
             groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
             if (groupList.Count > 0)
             {
                 Utils.PopulateGroupComboBox(cmbGroupName, groupList);
                 selectedGroup = groupList[0];
-                //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
             }
             else
             {
                 selectedGroup = null;
                 cmbGroupName.ResetText();
             }
+        }
 
+        private void SearchAndPopulateGpns()
+        {
             gpnList = Queries.SearchGpnByGroupID(conStr, selectedGroup);
             if (groupList.Count > 0)
             {
                 Utils.PopulateGpnComboBox(cmbGpnName, gpnList);
                 selectedGpn = gpnList[0];
-                //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
             }
             else
             {
                 selectedGpn = null;
                 cmbGpnName.ResetText();
             }
+        }
 
+        private void SearchAndPopulateBrands()
+        {
             brandList = Queries.SearchBrandAllReturnBrandList(conStr);
             Utils.PopulateGroupComboBox(cmbBrandName, brandList);
             selectedBrand = brandList[0];
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void cmbCategoryName_SelectionChangeCommitted(object sender, EventArgs e)
@@ -108,6 +119,63 @@ namespace WinFormUI.Forms
                 selectedGpn = null;
                 cmbGpnName.ResetText();
             }
+        }
+
+        private void cmbGpnName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            selectedGpn = cmbGpnName.SelectedItem as GenericProductName;
+        }
+
+        private void cmbBrandName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            selectedBrand = cmbBrandName.SelectedItem as Brand;
+        }
+
+        private void btnNewCategory_Click(object sender, EventArgs e)
+        {
+            Form f = FormFactory.MakeNewCategoryForm();
+            f.Show();
+        }
+
+        private void btnNewGroup_Click(object sender, EventArgs e)
+        {
+            Form f = FormFactory.MakeNewGroupForm();
+            f.Show();
+        }
+
+        private void btnNewGpn_Click(object sender, EventArgs e)
+        {
+            Form f = FormFactory.MakeNewGpnForm();
+            f.Show();
+        }
+
+        private void btnNewBrand_Click(object sender, EventArgs e)
+        {
+            Form f = FormFactory.MakeNewBrandForm();
+            f.Show();
+        }
+
+        private void btnRefreshCategory_Click(object sender, EventArgs e)
+        {
+            SearchAndPopulateCategories();
+            SearchAndPopulateGroups();
+            SearchAndPopulateGpns();
+        }
+
+        private void btnRefreshGroup_Click(object sender, EventArgs e)
+        {
+            SearchAndPopulateGroups();
+            SearchAndPopulateGpns();
+        }
+
+        private void btnRefreshGpn_Click(object sender, EventArgs e)
+        {
+            SearchAndPopulateGpns();
+        }
+
+        private void btnRefreshBrand_Click(object sender, EventArgs e)
+        {
+            SearchAndPopulateBrands();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -160,6 +228,16 @@ namespace WinFormUI.Forms
         private void txtProductName_TextChanged(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = Color.White;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

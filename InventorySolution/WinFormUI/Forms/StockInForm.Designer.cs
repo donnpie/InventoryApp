@@ -31,13 +31,17 @@ namespace WinFormUI.Forms
         {
             this.components = new System.ComponentModel.Container();
             this.grpBrand = new System.Windows.Forms.GroupBox();
+            this.txtBrandName = new System.Windows.Forms.TextBox();
             this.lblBrand = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtGpnName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.grpGroup = new System.Windows.Forms.GroupBox();
+            this.txtGroupName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.grpCategory = new System.Windows.Forms.GroupBox();
+            this.txtCategoryName = new System.Windows.Forms.TextBox();
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -49,22 +53,19 @@ namespace WinFormUI.Forms
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
+            this.txtDate = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblDate = new System.Windows.Forms.Label();
             this.txtProductID = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
             this.lblBarcode = new System.Windows.Forms.Label();
             this.lblProductID = new System.Windows.Forms.Label();
-            this.txtCategoryName = new System.Windows.Forms.TextBox();
-            this.txtGroupName = new System.Windows.Forms.TextBox();
-            this.txtGpnName = new System.Windows.Forms.TextBox();
-            this.txtBrandName = new System.Windows.Forms.TextBox();
             this.grpStore = new System.Windows.Forms.GroupBox();
             this.lblStoreName = new System.Windows.Forms.Label();
             this.cmbStoreName = new System.Windows.Forms.ComboBox();
-            this.lblPrice = new System.Windows.Forms.Label();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.lblTimestamp = new System.Windows.Forms.Label();
-            this.txtTimestamp = new System.Windows.Forms.TextBox();
-            this.chkContinuousScan = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.grpBrand.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpGroup.SuspendLayout();
@@ -84,6 +85,13 @@ namespace WinFormUI.Forms
             this.grpBrand.TabIndex = 33;
             this.grpBrand.TabStop = false;
             this.grpBrand.Text = "Brand";
+            // 
+            // txtBrandName
+            // 
+            this.txtBrandName.Location = new System.Drawing.Point(90, 20);
+            this.txtBrandName.Name = "txtBrandName";
+            this.txtBrandName.Size = new System.Drawing.Size(174, 20);
+            this.txtBrandName.TabIndex = 12;
             // 
             // lblBrand
             // 
@@ -105,6 +113,13 @@ namespace WinFormUI.Forms
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generic Product Name";
             // 
+            // txtGpnName
+            // 
+            this.txtGpnName.Location = new System.Drawing.Point(90, 20);
+            this.txtGpnName.Name = "txtGpnName";
+            this.txtGpnName.Size = new System.Drawing.Size(174, 20);
+            this.txtGpnName.TabIndex = 12;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -125,6 +140,13 @@ namespace WinFormUI.Forms
             this.grpGroup.TabStop = false;
             this.grpGroup.Text = "Group";
             // 
+            // txtGroupName
+            // 
+            this.txtGroupName.Location = new System.Drawing.Point(90, 20);
+            this.txtGroupName.Name = "txtGroupName";
+            this.txtGroupName.Size = new System.Drawing.Size(174, 20);
+            this.txtGroupName.TabIndex = 12;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -136,12 +158,13 @@ namespace WinFormUI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(334, 436);
+            this.btnCancel.Location = new System.Drawing.Point(334, 473);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 27;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // grpCategory
             // 
@@ -154,6 +177,13 @@ namespace WinFormUI.Forms
             this.grpCategory.TabStop = false;
             this.grpCategory.Text = "Category";
             // 
+            // txtCategoryName
+            // 
+            this.txtCategoryName.Location = new System.Drawing.Point(90, 20);
+            this.txtCategoryName.Name = "txtCategoryName";
+            this.txtCategoryName.Size = new System.Drawing.Size(174, 20);
+            this.txtCategoryName.TabIndex = 12;
+            // 
             // lblCategoryName
             // 
             this.lblCategoryName.AutoSize = true;
@@ -165,21 +195,23 @@ namespace WinFormUI.Forms
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(537, 436);
+            this.btnClose.Location = new System.Drawing.Point(537, 473);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(84, 23);
-            this.btnClose.TabIndex = 28;
-            this.btnClose.Text = "Add and close";
+            this.btnClose.TabIndex = 5;
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(433, 436);
+            this.btnAdd.Location = new System.Drawing.Point(433, 473);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 29;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // grpProduct
             // 
@@ -190,25 +222,27 @@ namespace WinFormUI.Forms
             this.grpProduct.Controls.Add(this.txtProductName);
             this.grpProduct.Controls.Add(this.lblProductName);
             this.grpProduct.Controls.Add(this.txtBarcode);
-            this.grpProduct.Controls.Add(this.txtTimestamp);
+            this.grpProduct.Controls.Add(this.txtDate);
+            this.grpProduct.Controls.Add(this.txtQuantity);
             this.grpProduct.Controls.Add(this.txtPrice);
-            this.grpProduct.Controls.Add(this.lblTimestamp);
+            this.grpProduct.Controls.Add(this.lblDate);
+            this.grpProduct.Controls.Add(this.label3);
             this.grpProduct.Controls.Add(this.txtProductID);
             this.grpProduct.Controls.Add(this.lblPrice);
             this.grpProduct.Controls.Add(this.lblBarcode);
             this.grpProduct.Controls.Add(this.lblProductID);
             this.grpProduct.Location = new System.Drawing.Point(333, 21);
             this.grpProduct.Name = "grpProduct";
-            this.grpProduct.Size = new System.Drawing.Size(288, 409);
+            this.grpProduct.Size = new System.Drawing.Size(288, 446);
             this.grpProduct.TabIndex = 30;
             this.grpProduct.TabStop = false;
             this.grpProduct.Text = "Product";
             // 
             // pctProductImage
             // 
-            this.pctProductImage.Location = new System.Drawing.Point(90, 216);
+            this.pctProductImage.Location = new System.Drawing.Point(90, 173);
             this.pctProductImage.Name = "pctProductImage";
-            this.pctProductImage.Size = new System.Drawing.Size(169, 97);
+            this.pctProductImage.Size = new System.Drawing.Size(169, 123);
             this.pctProductImage.TabIndex = 10;
             this.pctProductImage.TabStop = false;
             // 
@@ -217,13 +251,13 @@ namespace WinFormUI.Forms
             this.txtProductComments.Location = new System.Drawing.Point(90, 132);
             this.txtProductComments.Multiline = true;
             this.txtProductComments.Name = "txtProductComments";
-            this.txtProductComments.Size = new System.Drawing.Size(174, 67);
+            this.txtProductComments.Size = new System.Drawing.Size(174, 33);
             this.txtProductComments.TabIndex = 7;
             // 
             // lblProductImage
             // 
             this.lblProductImage.AutoSize = true;
-            this.lblProductImage.Location = new System.Drawing.Point(14, 216);
+            this.lblProductImage.Location = new System.Drawing.Point(14, 173);
             this.lblProductImage.Name = "lblProductImage";
             this.lblProductImage.Size = new System.Drawing.Size(36, 13);
             this.lblProductImage.TabIndex = 4;
@@ -259,7 +293,32 @@ namespace WinFormUI.Forms
             this.txtBarcode.Location = new System.Drawing.Point(90, 60);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(174, 20);
-            this.txtBarcode.TabIndex = 9;
+            this.txtBarcode.TabIndex = 0;
+            this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
+            // 
+            // txtDate
+            // 
+            this.txtDate.Location = new System.Drawing.Point(90, 374);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Size = new System.Drawing.Size(174, 20);
+            this.txtDate.TabIndex = 9;
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.Location = new System.Drawing.Point(90, 302);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(174, 20);
+            this.txtPrice.TabIndex = 1;
+            this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(14, 377);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(30, 13);
+            this.lblDate.TabIndex = 6;
+            this.lblDate.Text = "Date";
             // 
             // txtProductID
             // 
@@ -267,6 +326,15 @@ namespace WinFormUI.Forms
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.Size = new System.Drawing.Size(174, 20);
             this.txtProductID.TabIndex = 9;
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(14, 305);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(31, 13);
+            this.lblPrice.TabIndex = 6;
+            this.lblPrice.Text = "Price";
             // 
             // lblBarcode
             // 
@@ -285,34 +353,6 @@ namespace WinFormUI.Forms
             this.lblProductID.Size = new System.Drawing.Size(18, 13);
             this.lblProductID.TabIndex = 6;
             this.lblProductID.Text = "ID";
-            // 
-            // txtCategoryName
-            // 
-            this.txtCategoryName.Location = new System.Drawing.Point(90, 20);
-            this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Size = new System.Drawing.Size(174, 20);
-            this.txtCategoryName.TabIndex = 12;
-            // 
-            // txtGroupName
-            // 
-            this.txtGroupName.Location = new System.Drawing.Point(90, 20);
-            this.txtGroupName.Name = "txtGroupName";
-            this.txtGroupName.Size = new System.Drawing.Size(174, 20);
-            this.txtGroupName.TabIndex = 12;
-            // 
-            // txtGpnName
-            // 
-            this.txtGpnName.Location = new System.Drawing.Point(90, 20);
-            this.txtGpnName.Name = "txtGpnName";
-            this.txtGpnName.Size = new System.Drawing.Size(174, 20);
-            this.txtGpnName.TabIndex = 12;
-            // 
-            // txtBrandName
-            // 
-            this.txtBrandName.Location = new System.Drawing.Point(90, 20);
-            this.txtBrandName.Name = "txtBrandName";
-            this.txtBrandName.Size = new System.Drawing.Size(174, 20);
-            this.txtBrandName.TabIndex = 12;
             // 
             // grpStore
             // 
@@ -340,57 +380,30 @@ namespace WinFormUI.Forms
             this.cmbStoreName.Location = new System.Drawing.Point(90, 20);
             this.cmbStoreName.Name = "cmbStoreName";
             this.cmbStoreName.Size = new System.Drawing.Size(174, 21);
-            this.cmbStoreName.TabIndex = 0;
+            this.cmbStoreName.TabIndex = 3;
             // 
-            // lblPrice
+            // label3
             // 
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(14, 340);
-            this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(31, 13);
-            this.lblPrice.TabIndex = 6;
-            this.lblPrice.Text = "Price";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 340);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Quantity";
             // 
-            // txtPrice
+            // txtQuantity
             // 
-            this.txtPrice.Location = new System.Drawing.Point(90, 337);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(174, 20);
-            this.txtPrice.TabIndex = 9;
-            // 
-            // lblTimestamp
-            // 
-            this.lblTimestamp.AutoSize = true;
-            this.lblTimestamp.Location = new System.Drawing.Point(14, 377);
-            this.lblTimestamp.Name = "lblTimestamp";
-            this.lblTimestamp.Size = new System.Drawing.Size(58, 13);
-            this.lblTimestamp.TabIndex = 6;
-            this.lblTimestamp.Text = "Timestamp";
-            // 
-            // txtTimestamp
-            // 
-            this.txtTimestamp.Location = new System.Drawing.Point(90, 374);
-            this.txtTimestamp.Name = "txtTimestamp";
-            this.txtTimestamp.Size = new System.Drawing.Size(174, 20);
-            this.txtTimestamp.TabIndex = 9;
-            // 
-            // chkContinuousScan
-            // 
-            this.chkContinuousScan.AutoSize = true;
-            this.chkContinuousScan.Location = new System.Drawing.Point(12, 436);
-            this.chkContinuousScan.Name = "chkContinuousScan";
-            this.chkContinuousScan.Size = new System.Drawing.Size(105, 17);
-            this.chkContinuousScan.TabIndex = 36;
-            this.chkContinuousScan.Text = "Continuous scan";
-            this.toolTip1.SetToolTip(this.chkContinuousScan, "When unchecked, user must click the Add button after each scan");
-            this.chkContinuousScan.UseVisualStyleBackColor = true;
+            this.txtQuantity.Location = new System.Drawing.Point(90, 337);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(174, 20);
+            this.txtQuantity.TabIndex = 2;
+            this.txtQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 493);
-            this.Controls.Add(this.chkContinuousScan);
+            this.ClientSize = new System.Drawing.Size(655, 508);
             this.Controls.Add(this.grpStore);
             this.Controls.Add(this.grpBrand);
             this.Controls.Add(this.groupBox1);
@@ -416,7 +429,6 @@ namespace WinFormUI.Forms
             this.grpStore.ResumeLayout(false);
             this.grpStore.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -448,14 +460,15 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.Label lblBarcode;
         private System.Windows.Forms.Label lblProductID;
-        private System.Windows.Forms.TextBox txtTimestamp;
+        private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Label lblTimestamp;
+        private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.GroupBox grpStore;
         private System.Windows.Forms.Label lblStoreName;
         private System.Windows.Forms.ComboBox cmbStoreName;
-        private System.Windows.Forms.CheckBox chkContinuousScan;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox txtQuantity;
+        private System.Windows.Forms.Label label3;
     }
 }
