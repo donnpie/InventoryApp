@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormTests\FormTest.cs" />
+    <Compile Include="HelperTests\ConfigTest.cs" />
     <Compile Include="HelperTests\FormFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

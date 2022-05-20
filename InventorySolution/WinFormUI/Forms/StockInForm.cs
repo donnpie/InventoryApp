@@ -2,13 +2,9 @@
 using SqlLibrary.Queries;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -19,11 +15,11 @@ namespace WinFormUI.Forms
         private List<Store> storeList;
         private Store selectedStore;
         private readonly string conStr;
+        private readonly string imageFilePath;
         private int quantityLimit;
 
         private void SearchAndPopulateStores()
         {
-
             storeList = Queries.SearchStoreAllReturnStoreList(conStr);
             Utils.PopulateStoreComboBox(cmbStoreName, storeList);
             selectedStore = storeList[0];
@@ -33,6 +29,7 @@ namespace WinFormUI.Forms
         {
             InitializeComponent();
             conStr = Helper.ConfigInfo.GetConString("ConString");
+            imageFilePath = ConfigInfo.GetImageDirectory("ImageFileDirectory");
             SearchAndPopulateStores();
             txtBarcode.Select();
             txtQuantity.Text = "1";
@@ -55,10 +52,7 @@ namespace WinFormUI.Forms
                 Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
                 if (prod != null)
                 {
-                    //TODO: Load image from file name. Add utility to store image filepath
-                    string path = "C:\\Users\\donnp\\source\\repos\\Inventory app\\Img\\";
-                    //4088600427003.png
-                    pctProductImage.Image = new Bitmap($"{path}{prod.ImageFileName}");
+                    pctProductImage.Image = new Bitmap($"{imageFilePath}{prod.ImageFileName}");
                     pctProductImage.SizeMode = PictureBoxSizeMode.Zoom;
                     txtCategoryName.Text = prod.Gpn.Group.Category.Name;
                     txtGroupName.Text = prod.Gpn.Group.Name;
@@ -107,7 +101,6 @@ namespace WinFormUI.Forms
                 else txt.BackColor = Color.White;
             }
             else txt.BackColor = Color.White;
-
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
@@ -116,8 +109,6 @@ namespace WinFormUI.Forms
             {
                 e.Handled = true;
             }
-
-
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
@@ -232,7 +223,7 @@ namespace WinFormUI.Forms
             
             StockIn stock = new StockIn(barcode, selectedStore.Id, txtDate.Text, price, quantity);
             int rowsAffected;
-            bool result = Queries.InsertStockInMulti(conStr, stock, quantity, out rowsAffected);
+            bool result = Queries.InsertStockInMulti(conStr, stock, out rowsAffected);
             if (result) MessageBox.Show($"Success: {rowsAffected} row(s) inserted"); else MessageBox.Show("Failed to insert");
         }
 

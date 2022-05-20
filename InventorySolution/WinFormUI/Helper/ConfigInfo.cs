@@ -10,9 +10,15 @@ namespace WinFormUI.Helper
     {
         public static string GetConString(string conString)
         {
-            //return ConfigurationManager.ConnectionStrings[conString].ConnectionString;
+            return ConfigurationManager.ConnectionStrings[conString].ConnectionString;
+            //return "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
 
-            return "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
+        }
+        public static string GetImageDirectory(string imageFileDirectory)
+        {
+            //return ConfigurationManager.ConnectionStrings[conString].ConnectionString;
+            return ConfigurationManager.AppSettings[imageFileDirectory];
+            //return "Server=localhost\\SQLEXPRESS;Database=Inventory;Trusted_Connection=True;";
 
         }
 

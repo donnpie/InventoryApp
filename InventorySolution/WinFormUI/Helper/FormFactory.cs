@@ -107,7 +107,6 @@ namespace WinFormUI.Helper
 
         #endregion
 
-
         #region Group Form
         public static Form MakeGroupForm(
             FormMode mode,
@@ -250,6 +249,20 @@ namespace WinFormUI.Helper
             );
             return f;
         }
+
+        public static Form MakeViewProductForm()
+        {
+            ViewProductForm f = new ViewProductForm();
+            EnableControl("txtCategoryName", f, false);
+            EnableControl("txtGroupName", f, false);
+            EnableControl("txtGpnName", f, false);
+            EnableControl("txtBrandName", f, false);
+            EnableControl("txtProductID", f, false);
+            EnableControl("txtBarcode", f, true);
+            EnableControl("txtProductName", f, false);
+            EnableControl("txtProductComments", f, false);
+            return f;
+        }
         #endregion
 
         #region Brand Form
@@ -279,6 +292,7 @@ namespace WinFormUI.Helper
 
         #endregion
 
+        #region Stock Forms
         public static Form MakeStockInForm(
             string title = "Scan in stock",
             string addButtonText = "Add"
@@ -307,9 +321,8 @@ namespace WinFormUI.Helper
 
         
         public static Form MakeStockOutForm(
-            string title = "Stock Out",
-            string addButtonText = "Add",
-            bool[] canEditFields = null
+            string title = "Scan out stock",
+            string addButtonText = "Add"
         )
         {
             StockOutForm f = new StockOutForm();
@@ -317,21 +330,28 @@ namespace WinFormUI.Helper
             System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
             if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
 
-            if (canEditFields.Length == 11)
-            {
-                EnableControl("txtCategoryName", f, canEditFields[0]);
-                EnableControl("txtGroupName", f, canEditFields[1]);
-                EnableControl("txtGpnName", f, canEditFields[2]);
-                EnableControl("txtBrandName", f, canEditFields[3]);
-                EnableControl("cmbStoreName", f, canEditFields[4]);
-                EnableControl("txtProductID", f, canEditFields[5]);
-                EnableControl("txtBarcode", f, canEditFields[6]);
-                EnableControl("txtProductName", f, canEditFields[7]);
-                EnableControl("txtProductComments", f, canEditFields[8]);
-                EnableControl("txtPrice", f, canEditFields[9]);
-                EnableControl("txtTimestamp", f, canEditFields[10]);
-            }
+            EnableControl("txtCategoryName", f, false);
+            EnableControl("txtGroupName", f, false);
+            EnableControl("txtGpnName", f, false);
+            EnableControl("txtBrandName", f, false);
+            EnableControl("txtProductID", f, false);
+            EnableControl("txtBarcode", f, true);
+            EnableControl("txtProductName", f, false);
+            EnableControl("txtProductComments", f, false);
+            EnableControl("txtDate", f, false);
+            EnableControl("txtQuantity", f, true);
             return f;
         }
+        #endregion
+
+        #region Search Forms
+        public static Form MakeBasicSearchForm()
+        {
+            BasicSearchForm f = new BasicSearchForm();
+            return f;
+        }
+
+
+        #endregion
     }
 }

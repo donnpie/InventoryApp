@@ -1,7 +1,7 @@
 ﻿
 namespace WinFormUI.Forms
 {
-    partial class StockOutForm
+    partial class ViewProductForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,12 +39,10 @@ namespace WinFormUI.Forms
             this.grpGroup = new System.Windows.Forms.GroupBox();
             this.txtGroupName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.grpCategory = new System.Windows.Forms.GroupBox();
             this.txtCategoryName = new System.Windows.Forms.TextBox();
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.grpProduct = new System.Windows.Forms.GroupBox();
             this.pctProductImage = new System.Windows.Forms.PictureBox();
             this.txtProductComments = new System.Windows.Forms.TextBox();
@@ -53,15 +51,11 @@ namespace WinFormUI.Forms
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
-            this.txtDate = new System.Windows.Forms.TextBox();
-            this.lblDate = new System.Windows.Forms.Label();
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.lblBarcode = new System.Windows.Forms.Label();
             this.lblProductID = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddNewProduct = new System.Windows.Forms.Button();
-            this.lblQuantity = new System.Windows.Forms.Label();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.grpBrand.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpGroup.SuspendLayout();
@@ -151,16 +145,6 @@ namespace WinFormUI.Forms
             this.label1.TabIndex = 14;
             this.label1.Text = "Name";
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(334, 436);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // grpCategory
             // 
             this.grpCategory.Controls.Add(this.txtCategoryName);
@@ -190,23 +174,13 @@ namespace WinFormUI.Forms
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(537, 436);
+            this.btnClose.Location = new System.Drawing.Point(486, 436);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(84, 23);
+            this.btnClose.Size = new System.Drawing.Size(135, 23);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(433, 436);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // grpProduct
             // 
@@ -217,10 +191,6 @@ namespace WinFormUI.Forms
             this.grpProduct.Controls.Add(this.txtProductName);
             this.grpProduct.Controls.Add(this.lblProductName);
             this.grpProduct.Controls.Add(this.txtBarcode);
-            this.grpProduct.Controls.Add(this.txtQuantity);
-            this.grpProduct.Controls.Add(this.lblQuantity);
-            this.grpProduct.Controls.Add(this.txtDate);
-            this.grpProduct.Controls.Add(this.lblDate);
             this.grpProduct.Controls.Add(this.txtProductID);
             this.grpProduct.Controls.Add(this.lblBarcode);
             this.grpProduct.Controls.Add(this.lblProductID);
@@ -233,9 +203,9 @@ namespace WinFormUI.Forms
             // 
             // pctProductImage
             // 
-            this.pctProductImage.Location = new System.Drawing.Point(90, 216);
+            this.pctProductImage.Location = new System.Drawing.Point(90, 186);
             this.pctProductImage.Name = "pctProductImage";
-            this.pctProductImage.Size = new System.Drawing.Size(174, 125);
+            this.pctProductImage.Size = new System.Drawing.Size(174, 203);
             this.pctProductImage.TabIndex = 10;
             this.pctProductImage.TabStop = false;
             // 
@@ -244,13 +214,13 @@ namespace WinFormUI.Forms
             this.txtProductComments.Location = new System.Drawing.Point(90, 132);
             this.txtProductComments.Multiline = true;
             this.txtProductComments.Name = "txtProductComments";
-            this.txtProductComments.Size = new System.Drawing.Size(174, 67);
+            this.txtProductComments.Size = new System.Drawing.Size(174, 44);
             this.txtProductComments.TabIndex = 7;
             // 
             // lblProductImage
             // 
             this.lblProductImage.AutoSize = true;
-            this.lblProductImage.Location = new System.Drawing.Point(14, 216);
+            this.lblProductImage.Location = new System.Drawing.Point(14, 186);
             this.lblProductImage.Name = "lblProductImage";
             this.lblProductImage.Size = new System.Drawing.Size(36, 13);
             this.lblProductImage.TabIndex = 4;
@@ -290,22 +260,6 @@ namespace WinFormUI.Forms
             this.txtBarcode.TextChanged += new System.EventHandler(this.txtBarcode_TextChanged);
             this.txtBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBarcode_KeyPress);
             // 
-            // txtDate
-            // 
-            this.txtDate.Location = new System.Drawing.Point(90, 373);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(174, 20);
-            this.txtDate.TabIndex = 9;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(9, 376);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(30, 13);
-            this.lblDate.TabIndex = 6;
-            this.lblDate.Text = "Date";
-            // 
             // txtProductID
             // 
             this.txtProductID.Location = new System.Drawing.Point(90, 23);
@@ -333,34 +287,15 @@ namespace WinFormUI.Forms
             // 
             // btnAddNewProduct
             // 
-            this.btnAddNewProduct.Location = new System.Drawing.Point(12, 340);
+            this.btnAddNewProduct.Location = new System.Drawing.Point(12, 333);
             this.btnAddNewProduct.Name = "btnAddNewProduct";
-            this.btnAddNewProduct.Size = new System.Drawing.Size(107, 23);
+            this.btnAddNewProduct.Size = new System.Drawing.Size(112, 23);
             this.btnAddNewProduct.TabIndex = 45;
             this.btnAddNewProduct.Text = "Add new product";
             this.btnAddNewProduct.UseVisualStyleBackColor = true;
             this.btnAddNewProduct.Click += new System.EventHandler(this.btnAddNewProduct_Click);
             // 
-            // lblQuantity
-            // 
-            this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(9, 350);
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
-            this.lblQuantity.TabIndex = 6;
-            this.lblQuantity.Text = "Quantity";
-            // 
-            // txtQuantity
-            // 
-            this.txtQuantity.Location = new System.Drawing.Point(90, 347);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(174, 20);
-            this.txtQuantity.TabIndex = 1;
-            this.txtQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
-            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
-            // 
-            // StockOutForm
+            // ViewProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -369,12 +304,10 @@ namespace WinFormUI.Forms
             this.Controls.Add(this.grpBrand);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpGroup);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpCategory);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.grpProduct);
-            this.Name = "StockOutForm";
+            this.Name = "ViewProductForm";
             this.Text = "StockOutForm";
             this.grpBrand.ResumeLayout(false);
             this.grpBrand.PerformLayout();
@@ -401,12 +334,10 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.GroupBox grpGroup;
         private System.Windows.Forms.TextBox txtGroupName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox grpCategory;
         private System.Windows.Forms.TextBox txtCategoryName;
         private System.Windows.Forms.Label lblCategoryName;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox grpProduct;
         private System.Windows.Forms.PictureBox pctProductImage;
         private System.Windows.Forms.TextBox txtProductComments;
@@ -415,14 +346,10 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.TextBox txtBarcode;
-        private System.Windows.Forms.TextBox txtDate;
-        private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.TextBox txtProductID;
         private System.Windows.Forms.Label lblBarcode;
         private System.Windows.Forms.Label lblProductID;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnAddNewProduct;
-        private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.Label lblQuantity;
     }
 }

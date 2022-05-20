@@ -18,3 +18,6 @@ DELETE FROM Products WHERE ProductTradeName LIKE 'Test%'
 
 SELECT * FROM InventoryIn;
 DELETE FROM InventoryIn WHERE Barcode = '4088600427003' AND Date = '2022-05-20'
+
+SELECT * FROM InventoryOut;
+DELETE FROM InventoryOut WHERE Barcode = '4088600427003' AND Date = '2022-05-20'

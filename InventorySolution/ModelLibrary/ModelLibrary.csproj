@@ -50,6 +50,7 @@
     <Compile Include="Models\IBaseObject.cs" />
     <Compile Include="Models\ISimpleObject.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\StockOut.cs" />
     <Compile Include="Models\StockIn.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

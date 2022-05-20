@@ -1,3 +1,8 @@
 InventorySolution/packages
 InventorySolution/WinFormUI/App.config
-
+InventorySolution/ModelLibrary/bin
+InventorySolution/ModelLibrary/obj
+InventorySolution/SqlLibrary/bin
+InventorySolution/SqlLibrary/bin
+InventorySolution/WinFormUI/bin
+InventorySolution/WinFormUI/obj

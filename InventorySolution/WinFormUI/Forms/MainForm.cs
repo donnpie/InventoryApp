@@ -21,64 +21,52 @@ namespace WinFormUI.Forms
 
         private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewCategoryForm();
-            f.Show();
+            FormFactory.MakeNewCategoryForm().Show();
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewGroupForm();
-            f.Show();
+            FormFactory.MakeNewGroupForm();
         }
 
         private void genericProductNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewGpnForm();
-            f.Show();
+            FormFactory.MakeNewGpnForm().Show();
         }
 
         private void brandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewBrandForm();
-            f.Show();
+            FormFactory.MakeNewBrandForm().Show();
         }
 
         private void storeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewStoreForm();
-            f.Show();
+            FormFactory.MakeNewStoreForm().Show();
         }
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewProductForm();
-            f.Show();
+            FormFactory.MakeNewProductForm().Show();
         }
 
         private void stockCheckinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeStockInForm(
-                "Check stock in",
-                "Add"
-            );
-            f.Show();
+            FormFactory.MakeStockInForm().Show();
         }     
 
         private void stockCheckoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.Print(sender.ToString());
-            Form f = FormFactory.MakeStockOutForm(
-                "Check stock in",
-                "Add",
-                new bool[] { false, false, false, false, false, false, false, false, false }
-            );
-            f.Show();
+            FormFactory.MakeStockOutForm().Show();
         }
 
         private void basicSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicSearchForm f = new BasicSearchForm();
-            f.Show();
+            FormFactory.MakeBasicSearchForm().Show();
+        }
+
+        private void productToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormFactory.MakeViewProductForm().Show();
         }
 
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
