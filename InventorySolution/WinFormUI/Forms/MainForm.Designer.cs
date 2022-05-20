@@ -49,6 +49,7 @@ namespace WinFormUI.Forms
             this.searchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.basicSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedSearchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,8 @@ namespace WinFormUI.Forms
             this.addNewToolStripMenuItem,
             this.updateToolStripMenuItem,
             this.transactionsToolStripMenuItem,
-            this.searchToolStripMenuItem1});
+            this.searchToolStripMenuItem1,
+            this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -193,20 +195,26 @@ namespace WinFormUI.Forms
             this.searchToolStripMenuItem1.Name = "searchToolStripMenuItem1";
             this.searchToolStripMenuItem1.Size = new System.Drawing.Size(54, 20);
             this.searchToolStripMenuItem1.Text = "Search";
-         
             // 
             // basicSearchToolStripMenuItem
             // 
             this.basicSearchToolStripMenuItem.Name = "basicSearchToolStripMenuItem";
-            this.basicSearchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.basicSearchToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.basicSearchToolStripMenuItem.Text = "Basic search";
             this.basicSearchToolStripMenuItem.Click += new System.EventHandler(this.basicSearchToolStripMenuItem_Click);
             // 
             // advancedSearchedToolStripMenuItem
             // 
             this.advancedSearchedToolStripMenuItem.Name = "advancedSearchedToolStripMenuItem";
-            this.advancedSearchedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.advancedSearchedToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.advancedSearchedToolStripMenuItem.Text = "Advanced searched";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -246,5 +254,6 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem basicSearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem advancedSearchedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
     }
 }

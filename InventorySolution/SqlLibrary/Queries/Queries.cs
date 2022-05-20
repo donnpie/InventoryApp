@@ -533,6 +533,32 @@ namespace SqlLibrary.Queries
 
             return InsertIntoTable(conStr, query);
         }
+
+        public static bool InsertStockInMulti(string conStr, StockIn stock, int quantity, out int rowsAffected)
+        {
+            if (StringIsNullOrEmpty(conStr)) { rowsAffected = 0; return false; }
+            if (stock is null) { rowsAffected = 0; return false; }
+            if (quantity < 0.01) { rowsAffected = 0; return false; }
+            string query = $"EXEC SpInsertInventoryInMulti '{stock.Barcode}', {stock.StoreId}, '{stock.DateString}', {stock.Price}, {stock.Quantity}";
+
+            SqlConnection conn = new SqlConnection(conStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            try
+            {
+                rowsAffected = cmd.ExecuteNonQuery();
+                return (rowsAffected > 0);
+            }
+            catch (SqlException e)
+            {
+                rowsAffected = 0; return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
         #endregion
 
     }

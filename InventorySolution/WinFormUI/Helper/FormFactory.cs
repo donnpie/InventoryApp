@@ -43,7 +43,7 @@ namespace WinFormUI.Helper
             }
         }
 
-        public static MainForm MakeMainForm(string title = "Invetory App")
+        public static MainForm MakeMainForm(string title = "Inventory App")
         {
             MainForm f = new MainForm();
             f.Text = title;

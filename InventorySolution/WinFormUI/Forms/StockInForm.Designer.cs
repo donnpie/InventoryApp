@@ -54,8 +54,10 @@ namespace WinFormUI.Forms
             this.lblProductName = new System.Windows.Forms.Label();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.txtDate = new System.Windows.Forms.TextBox();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.lblDate = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtProductID = new System.Windows.Forms.TextBox();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblBarcode = new System.Windows.Forms.Label();
@@ -64,8 +66,8 @@ namespace WinFormUI.Forms
             this.lblStoreName = new System.Windows.Forms.Label();
             this.cmbStoreName = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.btnAddNewProduct = new System.Windows.Forms.Button();
+            this.btnAddNewStore = new System.Windows.Forms.Button();
             this.grpBrand.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpGroup.SuspendLayout();
@@ -242,7 +244,7 @@ namespace WinFormUI.Forms
             // 
             this.pctProductImage.Location = new System.Drawing.Point(90, 173);
             this.pctProductImage.Name = "pctProductImage";
-            this.pctProductImage.Size = new System.Drawing.Size(169, 123);
+            this.pctProductImage.Size = new System.Drawing.Size(174, 159);
             this.pctProductImage.TabIndex = 10;
             this.pctProductImage.TabStop = false;
             // 
@@ -298,27 +300,48 @@ namespace WinFormUI.Forms
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(90, 374);
+            this.txtDate.Location = new System.Drawing.Point(90, 410);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(174, 20);
             this.txtDate.TabIndex = 9;
             // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Location = new System.Drawing.Point(90, 373);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(174, 20);
+            this.txtQuantity.TabIndex = 2;
+            this.txtQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
+            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
+            // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(90, 302);
+            this.txtPrice.Location = new System.Drawing.Point(90, 338);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(174, 20);
             this.txtPrice.TabIndex = 1;
             this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
+            this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(14, 377);
+            this.lblDate.Location = new System.Drawing.Point(14, 413);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(30, 13);
             this.lblDate.TabIndex = 6;
             this.lblDate.Text = "Date";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 376);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Quantity";
             // 
             // txtProductID
             // 
@@ -330,7 +353,7 @@ namespace WinFormUI.Forms
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(14, 305);
+            this.lblPrice.Location = new System.Drawing.Point(14, 341);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(31, 13);
             this.lblPrice.TabIndex = 6;
@@ -381,29 +404,35 @@ namespace WinFormUI.Forms
             this.cmbStoreName.Name = "cmbStoreName";
             this.cmbStoreName.Size = new System.Drawing.Size(174, 21);
             this.cmbStoreName.TabIndex = 3;
+            this.cmbStoreName.SelectionChangeCommitted += new System.EventHandler(this.cmbStoreName_SelectionChangeCommitted);
             // 
-            // label3
+            // btnAddNewProduct
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 340);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Quantity";
+            this.btnAddNewProduct.Location = new System.Drawing.Point(12, 410);
+            this.btnAddNewProduct.Name = "btnAddNewProduct";
+            this.btnAddNewProduct.Size = new System.Drawing.Size(112, 23);
+            this.btnAddNewProduct.TabIndex = 36;
+            this.btnAddNewProduct.Text = "Add new product";
+            this.btnAddNewProduct.UseVisualStyleBackColor = true;
+            this.btnAddNewProduct.Click += new System.EventHandler(this.btnAddNewProduct_Click);
             // 
-            // txtQuantity
+            // btnAddNewStore
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(90, 337);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(174, 20);
-            this.txtQuantity.TabIndex = 2;
-            this.txtQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnAddNewStore.Location = new System.Drawing.Point(140, 410);
+            this.btnAddNewStore.Name = "btnAddNewStore";
+            this.btnAddNewStore.Size = new System.Drawing.Size(112, 23);
+            this.btnAddNewStore.TabIndex = 36;
+            this.btnAddNewStore.Text = "Add new store";
+            this.btnAddNewStore.UseVisualStyleBackColor = true;
+            this.btnAddNewStore.Click += new System.EventHandler(this.btnAddNewStore_Click);
             // 
             // StockInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 508);
+            this.Controls.Add(this.btnAddNewStore);
+            this.Controls.Add(this.btnAddNewProduct);
             this.Controls.Add(this.grpStore);
             this.Controls.Add(this.grpBrand);
             this.Controls.Add(this.groupBox1);
@@ -470,5 +499,7 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAddNewProduct;
+        private System.Windows.Forms.Button btnAddNewStore;
     }
 }

@@ -39,3 +39,4 @@ C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.visualstudio.testadapter.dll
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.reporters.net452.dll
 C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\bin\Debug\xunit.runner.utility.net452.dll
+C:\Users\donnp\source\repos\Inventory app\InventorySolution\WinFormUI\obj\Debug\WinFormUI.Forms.Test.resources

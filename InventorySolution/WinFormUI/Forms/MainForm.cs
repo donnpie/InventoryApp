@@ -80,5 +80,10 @@ namespace WinFormUI.Forms
             BasicSearchForm f = new BasicSearchForm();
             f.Show();
         }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Test().Show();
+        }
     }
 }
