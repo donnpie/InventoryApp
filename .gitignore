@@ -4,8 +4,14 @@ InventorySolution/.vs/
 InventorySolution/ModelLibrary/bin/
 InventorySolution/ModelLibrary/obj/
 
+InventorySolution/ModelLibrary.Test/bin/
+InventorySolution/ModelLibrary.Test/obj/
+
 InventorySolution/SqlLibrary/bin/
-InventorySolution/SqlLibrary/bin/
+InventorySolution/SqlLibrary/obj/
+
+InventorySolution/SqlLibrary.Test/bin/
+InventorySolution/SqlLibrary.Test/obj/
 
 InventorySolution/WinFormUI/bin/
 InventorySolution/WinFormUI/obj/
@@ -13,6 +19,9 @@ InventorySolution/WinFormUI/obj/
 InventorySolution/WinFormsUI.Test1/bin/
 InventorySolution/WinFormsUI.Test1/obj/
 
+InventorySolution/ConsoleUI/bin/
+InventorySolution/ConsoleUI/obj
+
 Img/
 
-InventorySolution/WinFormUI/App.config/
+InventorySolution/WinFormUI/App.config

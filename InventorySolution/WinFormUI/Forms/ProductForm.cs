@@ -3,6 +3,7 @@ using SqlLibrary.Queries;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -19,15 +20,17 @@ namespace WinFormUI.Forms
         GenericProductName selectedGpn;
         List<Brand> brandList;
         Brand selectedBrand;
+        private readonly string imageFilePath;
         public ProductForm()
         {
             InitializeComponent();
             conStr = Helper.ConfigInfo.GetConString("ConString");
-
+            imageFilePath = Helper.ConfigInfo.GetImageDirectory("ImageFileDirectory");
             SearchAndPopulateCategories();
             SearchAndPopulateGroups();
             SearchAndPopulateGpns();
             SearchAndPopulateBrands();
+            txtBarcode.Select();
         }
 
         private void SearchAndPopulateCategories()
@@ -87,7 +90,6 @@ namespace WinFormUI.Forms
                 {
                     Utils.PopulateGpnComboBox(cmbGpnName, gpnList);
                     selectedGpn = gpnList[0];
-                    //MessageBox.Show($"{selectedGroup.Id} {selectedGroup.Name}");
                 }
                 else
                 {
@@ -222,7 +224,50 @@ namespace WinFormUI.Forms
 
         private void txtBarcode_TextChanged(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
+            string barcode = txtBarcode.Text;
+            if (string.IsNullOrEmpty(barcode))
+            {
+                txtBarcode.BackColor = Color.Pink;
+                return;
+            }
+            else
+            {
+                txtBarcode.BackColor = Color.White;
+                Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
+                if (prod != null)
+                {
+                    string path = $"{imageFilePath}{prod.ImageFileName}";
+                    if (File.Exists(path)) pctProductImage.Image = new Bitmap(path);
+                    else pctProductImage.Image = null;
+                    pctProductImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+                    selectedCategory = prod.Gpn.Group.Category;
+                    cmbCategoryName.SelectedIndex = cmbCategoryName.FindStringExact(selectedCategory.Name);
+
+                    groupList = Queries.SearchGroupByCategoryID(conStr, selectedCategory);
+                    Utils.PopulateGroupComboBox(cmbGroupName, groupList);
+                    selectedGroup = prod.Gpn.Group;
+                    cmbGroupName.SelectedIndex = cmbGroupName.FindStringExact(selectedGroup.Name);
+
+                    gpnList = Queries.SearchGpnByGroupID(conStr, selectedGroup);
+                    Utils.PopulateGpnComboBox(cmbGpnName, gpnList);
+                    selectedGpn = prod.Gpn;
+                    cmbGpnName.SelectedIndex = cmbGpnName.FindStringExact(selectedGpn.Name);
+
+                    selectedBrand = prod.Brand;
+                    cmbBrandName.SelectedIndex = cmbBrandName.FindStringExact(selectedBrand.Name);
+
+                    txtProductName.Text = prod.Name;
+                    txtProductComments.Text = prod.Comments;
+                }
+                else
+                {
+                    pctProductImage.Image = null;
+                    txtProductID.Text = "";
+                    txtProductName.Text = "";
+                    txtProductComments.Text = "";
+                }
+            }
         }
 
         private void txtProductName_TextChanged(object sender, EventArgs e)

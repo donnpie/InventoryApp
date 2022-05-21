@@ -23,7 +23,6 @@ namespace WinFormUI.Forms
         private void txtBarcode_TextChanged(object sender, EventArgs e)
         {
             string barcode = txtBarcode.Text;
-            txtProductComments.Text = $"{barcode}";
             if (string.IsNullOrEmpty(barcode))
             {
                 txtBarcode.BackColor = Color.Pink;
