@@ -3,6 +3,7 @@ using SqlLibrary.Queries;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -40,7 +41,7 @@ namespace WinFormUI.Forms
         private void txtBarcode_TextChanged(object sender, EventArgs e)
         {
             string barcode = txtBarcode.Text;
-            txtProductComments.Text = $"{barcode}";
+            //txtProductComments.Text = $"{barcode}";
             if (string.IsNullOrEmpty(barcode))
             {
                 txtBarcode.BackColor = Color.Pink;
@@ -52,7 +53,8 @@ namespace WinFormUI.Forms
                 Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
                 if (prod != null)
                 {
-                    pctProductImage.Image = new Bitmap($"{imageFilePath}{prod.ImageFileName}");
+                    string path = $"{imageFilePath}{prod.ImageFileName}";
+                    if (File.Exists(path)) pctProductImage.Image = new Bitmap(path); else pctProductImage.Image = null;
                     pctProductImage.SizeMode = PictureBoxSizeMode.Zoom;
                     txtCategoryName.Text = prod.Gpn.Group.Category.Name;
                     txtGroupName.Text = prod.Gpn.Group.Name;
@@ -78,63 +80,22 @@ namespace WinFormUI.Forms
 
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                //Set Handled to true to cancel the KeyPress event.
-                //This keeps the control from processing the key press.
-                e.Handled = true;
-            }
+            Utils.AllowDigitsOnly(e);
         }
 
         private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (txt.Text.Length > 2)
-            {
-                int qty = Int32.Parse(txt.Text);
-                
-                if (qty > quantityLimit)
-                {
-                    Utils.MessageBoxError($"Maximum value for Quantity is {quantityLimit}");
-                    txt.BackColor = Color.Pink;
-                }
-                else txt.BackColor = Color.White;
-            }
-            else txt.BackColor = Color.White;
+            Utils.ValidateIntegerTextBox((TextBox)sender, quantityLimit);
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
+            Utils.AllowDigitsAndFullStop(e);
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            string input = txt.Text;
-            string regex = "^[0-9]+\\.[0-9]{1,2}$";
-            int dotCount = input.Count(ch => ch == '.');
-
-            if (dotCount > 1)
-            {
-                input = input.Substring(0, input.Length - 1);
-                txt.Text = input;
-                txt.SelectionStart = txt.Text.Length;
-                txt.SelectionLength = 0;
-            }
-            if (!Regex.Match(input, regex).Success)
-            {
-                txtProductComments.Text = $"{input} Error, dots: {dotCount}";
-                txt.BackColor = Color.Pink;
-            }
-            else
-            {
-                txtProductComments.Text = $"{input} OK, dots: {dotCount}";
-                txt.BackColor = Color.White;
-            }
+            Utils.ValidateDecimalTextBox((TextBox)sender);
         }
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)
@@ -149,14 +110,8 @@ namespace WinFormUI.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string barcode = txtBarcode.Text;
-            if (string.IsNullOrEmpty(barcode))
-            {
-                Utils.MessageBoxError("Barcode field cannot be empty");
-                txtBarcode.BackColor = Color.Pink;
-                return;
-            }
-            else txtBarcode.BackColor = Color.White;
+            bool barcodeIsNullOrEmpty = Utils.TextBoxIsNullOrEmpty(txtBarcode, "Barcode");
+            if (barcodeIsNullOrEmpty) return;
 
             if (selectedStore is null)
             {
@@ -173,58 +128,40 @@ namespace WinFormUI.Forms
             }
             else cmbStoreName.BackColor = Color.White;
 
-            if (string.IsNullOrEmpty(txtPrice.Text))
-            {
-                Utils.MessageBoxError("Price field cannot be empty");
-                txtPrice.BackColor = Color.Pink;
-                return;
-            }
-            else txtPrice.BackColor = Color.White;
-            float price;
-            if (!float.TryParse(txtPrice.Text, out price))
-            {
-                Utils.MessageBoxError($"Value entered for price is not valid");
-                txtPrice.BackColor = Color.Pink;
-                return;
-            }
-            else txtPrice.BackColor = Color.White;
+            bool priceIsNullOrEmpty = Utils.TextBoxIsNullOrEmpty(txtPrice, "Price");
+            if (priceIsNullOrEmpty) return;
 
-            if (string.IsNullOrEmpty(txtQuantity.Text))
-            {
-                Utils.MessageBoxError("Quantitiy field cannot be empty");
-                txtQuantity.BackColor = Color.Pink;
-                return;
-            }
-            else txtQuantity.BackColor = Color.White;
+            float price;
+            bool priceIsValidFloat = Utils.FloatTextBoxIsValidFloat(txtPrice, out price, "Price");
+            if (!priceIsValidFloat) return;
+
+            bool quantityIsNullOrEmpty = Utils.TextBoxIsNullOrEmpty(txtQuantity, "Quantity");
+            if (quantityIsNullOrEmpty) return;
+
             int quantity;
-            if (!Int32.TryParse(txtQuantity.Text, out quantity))
-            {
-                Utils.MessageBoxError($"Value entered for quantity is not valid");
-                txtQuantity.BackColor = Color.Pink;
-                return;
-            }
-            else txtQuantity.BackColor = Color.White;
-            if (quantity > quantityLimit)
-            {
-                Utils.MessageBoxError($"Maximum value for Quantity is {quantityLimit}");
-                txtQuantity.BackColor = Color.Pink;
-                return;
-            }
-            else txtQuantity.BackColor = Color.White;
+            bool quantityIsValid = Utils.IntegerTextBoxIsValidInteger(txtQuantity, out quantity);
+            if (!quantityIsValid) return;
             
+            bool quantityIsLessThanMaximum = Utils.IntegerTextBoxIsLessThanMaximum(txtQuantity, quantityLimit, quantity);
+            if (!quantityIsLessThanMaximum) return;
+
+            string barcode = txtBarcode.Text;
             Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
-            if (prod is null)
+
+            bool barcodeIsValid = Utils.BarcodeIsValid(txtBarcode, prod);
+            if (!barcodeIsValid) return;
+
+            try
             {
-                Utils.MessageBoxError($"Barcode not found. If this is a new product you must add it first");
-                txtBarcode.BackColor = Color.Pink;
-                return;
+                StockIn stock = new StockIn(barcode, selectedStore.Id, txtDate.Text, price, quantity);
+                int rowsAffected;
+                bool result = Queries.InsertStockInMulti(conStr, stock, out rowsAffected);
+                if (result) MessageBox.Show($"Success: {rowsAffected} row(s) inserted"); else MessageBox.Show("Failed to insert");
             }
-            else txtBarcode.BackColor = Color.White;
-            
-            StockIn stock = new StockIn(barcode, selectedStore.Id, txtDate.Text, price, quantity);
-            int rowsAffected;
-            bool result = Queries.InsertStockInMulti(conStr, stock, out rowsAffected);
-            if (result) MessageBox.Show($"Success: {rowsAffected} row(s) inserted"); else MessageBox.Show("Failed to insert");
+            catch (ArgumentException error)
+            {
+                Utils.MessageBoxError($"Invalid value passed to StockIn constructor. {error.Message}. {error.StackTrace}");
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

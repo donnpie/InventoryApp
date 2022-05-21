@@ -64,7 +64,7 @@ namespace ModelLibrary.Models
             get { return _price; }
             set
             {
-                if (value < 0.01)
+                if (value < 0.00)
                 {
                     throw new ArgumentException("The value provided for Price is not valid");
                 }

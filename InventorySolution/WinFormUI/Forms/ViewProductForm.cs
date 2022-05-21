@@ -1,13 +1,8 @@
 ﻿using ModelLibrary.Models;
 using SqlLibrary.Queries;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using WinFormUI.Helper;
 
@@ -40,7 +35,9 @@ namespace WinFormUI.Forms
                 Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
                 if (prod != null)
                 {
-                    pctProductImage.Image = new Bitmap($"{imageFilePath}{prod.ImageFileName}");
+                    string path = $"{imageFilePath}{prod.ImageFileName}";
+                    if (File.Exists(path)) pctProductImage.Image = new Bitmap(path);
+                    else pctProductImage.Image = null;
                     pctProductImage.SizeMode = PictureBoxSizeMode.Zoom;
                     txtCategoryName.Text = prod.Gpn.Group.Category.Name;
                     txtGroupName.Text = prod.Gpn.Group.Name;
@@ -70,27 +67,6 @@ namespace WinFormUI.Forms
             {
                 e.Handled = true;
             }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            string barcode = txtBarcode.Text;
-            if (string.IsNullOrEmpty(barcode))
-            {
-                Utils.MessageBoxError("Barcode field cannot be empty");
-                txtBarcode.BackColor = Color.Pink;
-                return;
-            }
-            else txtBarcode.BackColor = Color.White;
-
-            Product prod = Queries.SearchProductByBarcodeReturnProduct(conStr, barcode);
-            if (prod is null)
-            {
-                Utils.MessageBoxError($"Barcode not found. If this is a new product you must add it first");
-                txtBarcode.BackColor = Color.Pink;
-                return;
-            }
-            else txtBarcode.BackColor = Color.White;
         }
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)

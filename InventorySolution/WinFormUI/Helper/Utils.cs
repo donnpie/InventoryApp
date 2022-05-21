@@ -1,6 +1,9 @@
 ﻿using ModelLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace WinFormUI.Helper
@@ -71,7 +74,7 @@ namespace WinFormUI.Helper
             cmb.DisplayMember = "Name";
         }
 
-        public static void PopulateGroupComboBox(ComboBox cmb, List<Group> groupList)
+        public static void PopulateGroupComboBox(ComboBox cmb, List<ModelLibrary.Models.Group> groupList)
         {
             cmb.DataSource = groupList;
             cmb.ValueMember = "Id";
@@ -97,6 +100,121 @@ namespace WinFormUI.Helper
             cmb.DataSource = storeList;
             cmb.ValueMember = "Id";
             cmb.DisplayMember = "Name";
+        }
+
+        public static void AllowDigitsOnly(KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void AllowDigitsAndFullStop(KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void ValidateIntegerTextBox(TextBox txt, int quantityLimit)
+        {
+            if (txt.Text.Length > 2)
+            {
+                int qty = Int32.Parse(txt.Text);
+
+                IntegerTextBoxIsLessThanMaximum(txt, quantityLimit, qty);
+            }
+            else txt.BackColor = Color.White;
+        }
+
+        public static void ValidateDecimalTextBox(TextBox txt)
+        {
+            string input = txt.Text;
+            string regex = "^[0-9]+\\.[0-9]{1,2}$";
+            int dotCount = input.Count(ch => ch == '.');
+
+            if (dotCount > 1)
+            {
+                input = input.Substring(0, input.Length - 1);
+                txt.Text = input;
+                txt.SelectionStart = txt.Text.Length;
+                txt.SelectionLength = 0;
+            }
+            if (!Regex.Match(input, regex).Success)
+            {
+                //txtProductComments.Text = $"{input} Error, dots: {dotCount}";
+                txt.BackColor = Color.Pink;
+            }
+            else
+            {
+                //txtProductComments.Text = $"{input} OK, dots: {dotCount}";
+                txt.BackColor = Color.White;
+            }
+        }
+
+        public static bool IntegerTextBoxIsLessThanMaximum(TextBox txt, int quantityLimit, int qty)
+        {
+            if (qty > quantityLimit)
+            {
+                Utils.MessageBoxError($"Maximum value for Quantity is {quantityLimit}");
+                txt.BackColor = Color.Pink;
+                return false;
+            }
+            else
+            {
+                txt.BackColor = Color.White;
+                return true;
+            }
+        }
+
+        public static bool TextBoxIsNullOrEmpty(TextBox txt, string fieldName)
+        {
+            if (string.IsNullOrEmpty(txt.Text))
+            {
+                Utils.MessageBoxError($"{fieldName} field cannot be empty");
+                txt.BackColor = Color.Pink;
+                return true;
+            }
+            else
+            {
+                txt.BackColor = Color.White;
+                return false;
+            }
+        }
+
+        public static bool IntegerTextBoxIsValidInteger(TextBox txt, out int quantity)
+        {
+            if (!Int32.TryParse(txt.Text, out quantity))
+            {
+                Utils.MessageBoxError($"Value entered for quantity is not valid");
+                txt.BackColor = Color.Pink;
+                return false;
+            }
+            else { txt.BackColor = Color.White; return true; }
+        }
+
+        public static bool FloatTextBoxIsValidFloat(TextBox txt, out float value, string fieldname)
+        {
+            if (!float.TryParse(txt.Text, out value))
+            {
+                Utils.MessageBoxError($"Value entered for {fieldname} is not valid");
+                txt.BackColor = Color.Pink;
+                return false;
+            }
+            else { txt.BackColor = Color.White; return true; }
+        }
+
+        public static bool BarcodeIsValid(TextBox txt, Product prod)
+        {
+            if (prod is null)
+            {
+                Utils.MessageBoxError($"Barcode not found. If this is a new product you must add it first");
+                txt.BackColor = Color.Pink;
+                return false;
+            }
+            else { txt.BackColor = Color.White; return true; }
         }
     }
 }
