@@ -215,7 +215,8 @@ namespace WinFormUI.Forms
                 return;
             }
             string comments = txtProductComments.Text;
-            string imageFileName = txtFilePath.Text;
+            //string imageFileName = txtFilePath.Text;
+            string imageFileName = txtBarcode.Text + ".png";
 
             Product prod = new Product(name, barcode, comments, imageFileName, selectedGpn, selectedBrand);
             bool result = Queries.InsertProduct(conStr, prod);

@@ -308,7 +308,7 @@ namespace WinFormUI.Forms
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.grpProduct);
             this.Name = "ViewProductForm";
-            this.Text = "StockOutForm";
+            this.Text = "View product";
             this.grpBrand.ResumeLayout(false);
             this.grpBrand.PerformLayout();
             this.groupBox1.ResumeLayout(false);
