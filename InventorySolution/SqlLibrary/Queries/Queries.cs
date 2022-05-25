@@ -170,7 +170,9 @@ namespace SqlLibrary.Queries
 
         public static List<Category> SearchCategoryAllReturnCategoryList(string conStr)
         {
-            return SearchCategoryTableAllReturnCategoryList(conStr, "SpSelectCategoryAll");
+            List < Category > result = SearchCategoryTableAllReturnCategoryList(conStr, "SpSelectCategoryAll");
+            result.Sort(new CompareCategoriesByName());
+            return result;
         }
 
         #endregion
@@ -210,6 +212,8 @@ namespace SqlLibrary.Queries
 
         public static List<Group> SearchGroupByCategoryID(string conStr, Category cat)
         {
+            if (conStr is null) throw new ArgumentException("Connection string cannot be empty");
+            if (cat is null) return new List<Group>();
             SqlConnection con = new SqlConnection(conStr);
             string query = $"EXEC SpSelectGroupByCategoryId {cat.Id}";
             SqlCommand com = new SqlCommand(query, con);
@@ -222,6 +226,7 @@ namespace SqlLibrary.Queries
                 grpList.Add(new Group((int)rcd[0], (string)rcd[1], (string)rcd[2], cat));
             }
             con.Close();
+            grpList.Sort(new CompareGroupsByName());
             return grpList;
         }
         #endregion
@@ -250,6 +255,8 @@ namespace SqlLibrary.Queries
 
         public static List<GenericProductName> SearchGpnByGroupID(string conStr, Group group)
         {
+            if (conStr is null) throw new ArgumentException("Connection string cannot be empty");
+            if (group is null) return new List<GenericProductName>();
             SqlConnection con = new SqlConnection(conStr);
             string query = $"EXEC SpSelectGenericProductNameByGroupId {group.Id}";
             SqlCommand com = new SqlCommand(query, con);
@@ -261,6 +268,7 @@ namespace SqlLibrary.Queries
                 IDataRecord rcd = reader;
                 gpnList.Add(new GenericProductName((int)rcd[0], (string)rcd[1], group));
             }
+            gpnList.Sort(new CompareGpnsByName());
             con.Close();
             return gpnList;
         }
@@ -301,7 +309,9 @@ namespace SqlLibrary.Queries
 
         public static List<Brand> SearchBrandAllReturnBrandList(string conStr)
         {
-            return SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
+            List < Brand > result = SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
+            result.Sort(new CompareBrandsByName());
+            return result;
         }
 
         /// <summary>
@@ -428,7 +438,9 @@ namespace SqlLibrary.Queries
 
         public static List<Store> SearchStoreAllReturnStoreList(string conStr)
         {
-            return SearchStoreTableAllReturnStoreList(conStr, "SpSelectStoreAll");
+            List<Store> result = SearchStoreTableAllReturnStoreList(conStr, "SpSelectStoreAll");
+            result.Sort(new CompareStoresByName());
+            return result;
         }
 
         private static List<Store> SearchStoreTableAllReturnStoreList(string conStr, string storedProcedureName)

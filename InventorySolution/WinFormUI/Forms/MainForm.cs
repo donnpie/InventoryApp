@@ -26,7 +26,7 @@ namespace WinFormUI.Forms
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormFactory.MakeNewGroupForm();
+            FormFactory.MakeNewGroupForm().Show();
         }
 
         private void genericProductNameToolStripMenuItem_Click(object sender, EventArgs e)

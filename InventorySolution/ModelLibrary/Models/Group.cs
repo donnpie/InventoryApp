@@ -31,4 +31,12 @@ namespace ModelLibrary.Models
             Category.Print();
         }
     }
+
+    public class CompareGroupsByName : IComparer<Group>
+    {
+        public int Compare(Group x, Group y)
+        {
+            return string.Compare(x.Name, y.Name);
+        }
+    }
 }

@@ -12,8 +12,11 @@ namespace WinFormUI.Forms
     {
         readonly string conStr;
         readonly FormMode mode;
-        //List<string> values;
+        List<Category> catList;
         Category selectedCategory;
+
+        public List<Category> CatList { get { return catList; } set { catList = value; } }
+        public Category SelectedCategory { get { return selectedCategory; } set { selectedCategory = value; } }
 
         public GroupForm(FormMode mode)
         {
@@ -44,11 +47,15 @@ namespace WinFormUI.Forms
 
         void LoadCategoryDataFromList()
         {
-            List<Category> list = Queries.SearchCategoryAllReturnCategoryList(conStr);
-            this.cmbCategoryName.DataSource = list;
-            this.cmbCategoryName.ValueMember = "Id";
-            this.cmbCategoryName.DisplayMember = "Name";
-            this.selectedCategory = list[0];
+            catList = Queries.SearchCategoryAllReturnCategoryList(conStr);
+            Utils.PopulateCategoryComboBox(cmbCategoryName, catList);
+            this.selectedCategory = catList[0];
+        }
+
+        public void SetCategoryComboBox()
+        {
+            Utils.PopulateCategoryComboBox(cmbCategoryName, catList);
+            cmbCategoryName.SelectedIndex = cmbCategoryName.FindStringExact(selectedCategory.Name);
         }
 
         private void cmbCategoryName_SelectionChangeCommitted(object sender, EventArgs e)

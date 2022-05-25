@@ -10,10 +10,14 @@ CREATE PROC SpSelectGroup (
 AS
 BEGIN
 	SELECT
-		ID AS ID
-		,Name AS Name
-		,Description AS Description
-	FROM Groups
+		Groups.ID AS ID
+		,Groups.Name AS Name
+		,Groups.Description AS Description
+		,Categories.ID AS CategoryID
+		,Categories.Name AS CategoryName
+		,Categories.Description AS CategoryDescription
+	FROM Groups AS Groups
+	JOIN Categories AS Categories ON Groups.CategoryID = Categories.ID
 	WHERE CategoryID = @CategoryID
 END
 GO

@@ -58,7 +58,7 @@ namespace WinFormUI.Forms
         private void SearchAndPopulateGpns()
         {
             gpnList = Queries.SearchGpnByGroupID(conStr, selectedGroup);
-            if (groupList.Count > 0)
+            if (gpnList.Count > 0)
             {
                 Utils.PopulateGpnComboBox(cmbGpnName, gpnList);
                 selectedGpn = gpnList[0];
@@ -141,13 +141,28 @@ namespace WinFormUI.Forms
 
         private void btnNewGroup_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewGroupForm();
+            GroupForm f = FormFactory.MakeNewGroupForm() as GroupForm;
+
+            f.CatList = catList;
+            f.SelectedCategory = selectedCategory;
+            f.SetCategoryComboBox();
+
             f.Show();
         }
 
         private void btnNewGpn_Click(object sender, EventArgs e)
         {
-            Form f = FormFactory.MakeNewGpnForm();
+            if (selectedGroup == null) { MessageBox.Show("First select a valid group"); return; }
+            GpnForm f = FormFactory.MakeNewGpnForm() as GpnForm;
+
+            f.CatList = catList;
+            f.SelectedCategory = selectedCategory;
+            f.SetCategoryComboBox();
+
+            f.GroupList = groupList;
+            f.SelectedGroup = selectedGroup;
+            f.SetGroupCombox();
+
             f.Show();
         }
 

@@ -12,4 +12,12 @@ namespace ModelLibrary.Models
 
         public Brand(string name, string description) : base(name, description) { }
     }
+
+    public class CompareBrandsByName : IComparer<Brand>
+    {
+        public int Compare(Brand x, Brand y)
+        {
+            return string.Compare(x.Name, y.Name);
+        }
+    }
 }

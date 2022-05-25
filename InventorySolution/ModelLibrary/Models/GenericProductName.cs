@@ -49,6 +49,13 @@ namespace ModelLibrary.Models
             Console.WriteLine("Group:");
             Group.Print();
         }
+    }
 
+    public class CompareGpnsByName : IComparer<GenericProductName>
+    {
+        public int Compare(GenericProductName x, GenericProductName y)
+        {
+            return string.Compare(x.Name, y.Name);
+        }
     }
 }

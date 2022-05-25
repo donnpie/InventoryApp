@@ -1,27 +1,36 @@
-USE Inventory
+USE [Inventory]
 GO
 
 DROP VIEW IF EXISTS InventoryOutView
 GO
 
-CREATE VIEW InventoryOutView AS
+CREATE VIEW [dbo].[InventoryOutView] AS
 (
 	SELECT 
 		Inv.ID AS "Inv.ID"
-		,Inv.Barcode AS "Inv.Barcode"
 		,Inv.Date AS "Inv.Date"
-		,Prod.GenericProductNameID AS "Prod.GenericProductNameID"
-		,Prod.BrandID AS "Prod.BrandID"
+
+		,Prod.ID AS "Prod.ID"
+		,Prod.Barcode AS "Prod.Barcode"
 		,Prod.ProductTradeName AS "Prod.ProductTradeName"
-		,Gen.ID AS "Gen.ID"
-		,Gen.Name AS "Gen.GenericProdName"
-		,Gen.GroupID AS "Gen.GroupID"
-		,Gr.ID AS "Gr.ID"
-		,Gr.Name AS "Gr.GroupName"
-		,Gr.Description AS "Gr.Description"
-		,Gr.CategoryID AS "Gr.CategoryID"
+		,Prod.Comments AS "Prod.Comments"
+		,Prod.ImageFileName AS "Prod.ImageFileName"
+		
+		,Cat.ID AS "Cat.ID"
 		,Cat.Name AS "Cat.CatName"
 		,Cat.Description AS "Cat.CatDescription"
+
+		,Gr.ID AS "Gr.ID"
+		,Gr.Name AS "Gr.Name"
+		,Gr.Description AS "Gr.Description"
+
+		,Gen.ID AS "Gen.ID"
+		,Gen.Name AS "Gen.Name"
+		,Gen.Description AS "Gen.Description"
+
+		,Br.ID AS "Br.ID"
+		,Br.Name AS "Br.Name"
+		,Br.Description AS "Br.Description"
 	FROM InventoryOut AS Inv
 	JOIN Products AS Prod ON Inv.Barcode = Prod.Barcode
 	JOIN Brands AS Br ON Prod.BrandID = Br.ID
@@ -31,4 +40,4 @@ CREATE VIEW InventoryOutView AS
 )
 GO
 
-SELECT * FROM InventoryOutView;
+

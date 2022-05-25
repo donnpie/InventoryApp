@@ -20,6 +20,12 @@ namespace WinFormUI.Forms
         Category selectedCategory;
         List<Group> groupList;
         Group selectedGroup;
+
+        public List<Category> CatList { get { return catList; } set { catList = value; } }
+        public Category SelectedCategory { get { return selectedCategory; } set { selectedCategory = value; } }
+        public List<Group> GroupList { get { return groupList; } set{ groupList = value; } }
+        public Group SelectedGroup { get { return selectedGroup; } set { selectedGroup = value; } }
+
         public GpnForm()
         {
             InitializeComponent();
@@ -34,6 +40,18 @@ namespace WinFormUI.Forms
                 Utils.PopulateGroupComboBox(cmbGroupName, groupList);
                 selectedGroup = groupList[0];
             }
+        }
+
+        public void SetCategoryComboBox()
+        {
+            Utils.PopulateCategoryComboBox(cmbCategoryName, catList);
+            cmbCategoryName.SelectedIndex = cmbCategoryName.FindStringExact(selectedCategory.Name);
+        }
+
+        public void SetGroupCombox()
+        {
+            Utils.PopulateGroupComboBox(cmbGroupName, groupList);
+            cmbGroupName.SelectedIndex = cmbGroupName.FindStringExact(selectedGroup.Name);
         }
 
         //private void PopulateCategoryComboBox(ComboBox cmb, List<Category> catList)
