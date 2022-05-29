@@ -37,6 +37,8 @@ namespace WinFormUI.Forms
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.storeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,7 @@ namespace WinFormUI.Forms
             this.basicSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedSearchedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.productToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,12 +126,28 @@ namespace WinFormUI.Forms
             this.storeToolStripMenuItem.Text = "Store";
             this.storeToolStripMenuItem.Click += new System.EventHandler(this.storeToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productToolStripMenuItem1});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // productToolStripMenuItem1
+            // 
+            this.productToolStripMenuItem1.Name = "productToolStripMenuItem1";
+            this.productToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.productToolStripMenuItem1.Text = "Product";
+            this.productToolStripMenuItem1.Click += new System.EventHandler(this.productToolStripMenuItem1_Click);
+            // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.categoryToolStripMenuItem1,
             this.groupToolStripMenuItem1,
             this.genericProductNameToolStripMenuItem1,
+            this.productToolStripMenuItem2,
             this.brandToolStripMenuItem1,
             this.storeToolStripMenuItem1});
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
@@ -219,20 +236,12 @@ namespace WinFormUI.Forms
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
-            // viewToolStripMenuItem
+            // productToolStripMenuItem2
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productToolStripMenuItem1});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // productToolStripMenuItem1
-            // 
-            this.productToolStripMenuItem1.Name = "productToolStripMenuItem1";
-            this.productToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.productToolStripMenuItem1.Text = "Product";
-            this.productToolStripMenuItem1.Click += new System.EventHandler(this.productToolStripMenuItem1_Click);
+            this.productToolStripMenuItem2.Name = "productToolStripMenuItem2";
+            this.productToolStripMenuItem2.Size = new System.Drawing.Size(194, 22);
+            this.productToolStripMenuItem2.Text = "Product";
+            this.productToolStripMenuItem2.Click += new System.EventHandler(this.productToolStripMenuItem2_Click);
             // 
             // MainForm
             // 
@@ -275,5 +284,6 @@ namespace WinFormUI.Forms
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem2;
     }
 }

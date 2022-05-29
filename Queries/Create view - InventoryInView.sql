@@ -1,10 +1,15 @@
-USE Inventory
+USE [Inventory]
 GO
 
-DROP VIEW IF EXISTS InventoryInView
+/****** Object:  View [dbo].[InventoryInView]    Script Date: 2022/05/25 5:10:10 PM ******/
+SET ANSI_NULLS ON
 GO
 
-CREATE VIEW InventoryInView AS
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[InventoryInView] AS
 (
 	SELECT 
 		Inv.ID AS "Inv.ID"
@@ -46,4 +51,4 @@ CREATE VIEW InventoryInView AS
 )
 GO
 
-SELECT * FROM InventoryInView;
+

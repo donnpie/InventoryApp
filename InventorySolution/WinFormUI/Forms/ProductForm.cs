@@ -20,7 +20,22 @@ namespace WinFormUI.Forms
         GenericProductName selectedGpn;
         List<Brand> brandList;
         Brand selectedBrand;
-        private readonly string imageFilePath;
+        private string imageFilePath;
+
+        public string ConStr { get { return conStr; } set { conStr = value; } }
+        public string ImageFilePath { get { return imageFilePath; } set { imageFilePath = value; } }
+        public List<Category> CatList { get { return catList; } set { catList = value; } }
+        public Category SelectedCategory { get { return selectedCategory; } set { selectedCategory = value; } }
+        public List<Group> GroupList { get { return groupList; } set { groupList = value; } }
+        public Group SelectedGroup { get { return selectedGroup; } set { selectedGroup = value; } }
+        public List<GenericProductName> GpnList { get { return gpnList; } set { gpnList = value; } }
+        public GenericProductName SelectedGpn { get { return selectedGpn; } set { selectedGpn = value; } }
+        public List<Brand> BrandList { get { return brandList; } set { brandList = value; } }
+        public Brand SelectedBrand { get { return selectedBrand; } set { selectedBrand = value; } }
+        public TextBox TxtProductName { get { return this.txtProductName; } }
+        public TextBox TxtBarcode { get { return this.txtBarcode; } }
+        public TextBox TxtProductComments { get { return this.txtProductComments; } }
+        public TextBox TxtProductId { get { return this.txtProductID; } }
         public ProductForm()
         {
             InitializeComponent();
@@ -86,7 +101,7 @@ namespace WinFormUI.Forms
             {
                 selectedGroup = groupList[0];
                 gpnList = Queries.SearchGpnByGroupID(conStr, selectedGroup);
-                if (groupList.Count > 0)
+                if (gpnList.Count > 0)
                 {
                     Utils.PopulateGpnComboBox(cmbGpnName, gpnList);
                     selectedGpn = gpnList[0];
@@ -195,7 +210,7 @@ namespace WinFormUI.Forms
             SearchAndPopulateBrands();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public virtual void btnAdd_Click(object sender, EventArgs e)
         {
             if (selectedCategory is null)
             {
@@ -273,6 +288,7 @@ namespace WinFormUI.Forms
                     selectedBrand = prod.Brand;
                     cmbBrandName.SelectedIndex = cmbBrandName.FindStringExact(selectedBrand.Name);
 
+                    txtProductID.Text = (prod.Id).ToString();
                     txtProductName.Text = prod.Name;
                     txtProductComments.Text = prod.Comments;
                 }

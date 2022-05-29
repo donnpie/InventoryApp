@@ -44,6 +44,7 @@ namespace WinFormUI.Forms
             FormFactory.MakeNewStoreForm().Show();
         }
 
+        //Create new product
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.MakeNewProductForm().Show();
@@ -64,6 +65,7 @@ namespace WinFormUI.Forms
             FormFactory.MakeBasicSearchForm().Show();
         }
 
+        //View product
         private void productToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FormFactory.MakeViewProductForm().Show();
@@ -72,6 +74,12 @@ namespace WinFormUI.Forms
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new Test().Show();
+        }
+
+        //Update product
+        private void productToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FormFactory.MakeUpdateProductForm().Show();
         }
     }
 }

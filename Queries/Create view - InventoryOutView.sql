@@ -40,4 +40,8 @@ CREATE VIEW [dbo].[InventoryOutView] AS
 )
 GO
 
+SELECT TOP(10) *
+FROM InventoryOutView
+
+
 

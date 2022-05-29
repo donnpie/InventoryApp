@@ -15,7 +15,6 @@ namespace SqlLibrary.Queries
         {
             return (s is null || s == "");
         }
-
         private static DataTable CreateDataTable(string conStr, string query)
         {
             SqlConnection conn = new SqlConnection(conStr);
@@ -27,7 +26,6 @@ namespace SqlLibrary.Queries
             conn.Close();
             return dt;
         }
-
         private static DataTable SearchTableByID(string conStr, string id, string storedProcedureName)
         {
             if (StringIsNullOrEmpty(id)) { return null; }
@@ -36,7 +34,6 @@ namespace SqlLibrary.Queries
 
             return CreateDataTable(conStr, query);
         }
-
         private static DataTable SearchTableByName(string conStr, string name, string storedProcedureName)
         {
             if (StringIsNullOrEmpty(name)) { return null; }
@@ -45,7 +42,6 @@ namespace SqlLibrary.Queries
 
             return CreateDataTable(conStr, query);
         }
-
         private static DataTable SearchTableAllReturnDataTable(string conStr, string storedProcedureName)
         {
             if (StringIsNullOrEmpty(conStr)) { return null; }
@@ -53,8 +49,7 @@ namespace SqlLibrary.Queries
 
             return CreateDataTable(conStr, query);
         }
-
-        private static bool InsertIntoTable(string conStr, string query)
+        private static bool InsertOrUpdateOneRowInTable(string conStr, string query)
         {
             SqlConnection conn = new SqlConnection(conStr);
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -97,10 +92,7 @@ namespace SqlLibrary.Queries
 
             return list;
         }
-
-        
         #endregion
-
         #region Catergory queries
         private static List<Category> SearchCategoryTableAllReturnCategoryList(string conStr, string storedProcedureName)
         {
@@ -174,9 +166,23 @@ namespace SqlLibrary.Queries
             result.Sort(new CompareCategoriesByName());
             return result;
         }
+        /// <summary>
+        /// Inserts a record into the specified table
+        /// </summary>
+        /// <param name="conStr">The sql connection string</param>
+        /// <param name="name">The name field of the record</param>
+        /// <param name="description">The description field of the record</param>
+        /// <returns></returns>
+        public static bool InsertCategory(string conStr, string name, string description)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(name)) { return false; }
+            string query = $"EXEC SpInsertCategory '{name}', '{description}'";
+
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
 
         #endregion
-
         #region Group queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
@@ -188,7 +194,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByName(conStr, name, "SpSelectGroupByName");
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
         /// </summary>
@@ -198,7 +203,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableAllReturnDataTable(conStr, "SpSelectGroupAll");
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -209,7 +213,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectGroupById");
         }
-
         public static List<Group> SearchGroupByCategoryID(string conStr, Category cat)
         {
             if (conStr is null) throw new ArgumentException("Connection string cannot be empty");
@@ -229,8 +232,17 @@ namespace SqlLibrary.Queries
             grpList.Sort(new CompareGroupsByName());
             return grpList;
         }
-        #endregion
+        public static bool InsertGroup(string conStr, Group group)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(group.Name)) { return false; }
+            if (StringIsNullOrEmpty(group.Category.Name)) { return false; }
+            if (group.Category.Id < 1) { return false; }
+            string query = $"EXEC SpInsertGroup '{group.Name}', '{group.Description}', {group.Category.Id}";
 
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
+        #endregion
         #region Generic Product Name queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
@@ -242,7 +254,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByName(conStr, name, "SpSelectGenericProductNameByName");
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
         /// </summary>
@@ -252,7 +263,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableAllReturnDataTable(conStr, "SpSelectGenericProductNameAll");
         }
-
         public static List<GenericProductName> SearchGpnByGroupID(string conStr, Group group)
         {
             if (conStr is null) throw new ArgumentException("Connection string cannot be empty");
@@ -272,7 +282,6 @@ namespace SqlLibrary.Queries
             con.Close();
             return gpnList;
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -283,8 +292,16 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectGenericProductNameById");
         }
-        #endregion
+        public static bool InsertGpn(string conStr, GenericProductName gpn)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (gpn is null) { return false; }
+            if (gpn.Group.Id == 0) { return false; }
+            string query = $"EXEC SpInsertGenericProductName '{gpn.Name}', '', {gpn.Group.Id}";
 
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
+        #endregion
         #region Brand queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
@@ -296,7 +313,6 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByName(conStr, name, "SpSelectBrandByName");
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
         /// </summary>
@@ -306,14 +322,12 @@ namespace SqlLibrary.Queries
         {
             return SearchTableAllReturnDataTable(conStr, "SpSelectBrandAll");
         }
-
         public static List<Brand> SearchBrandAllReturnBrandList(string conStr)
         {
             List < Brand > result = SearchBrandTableAllReturnBrandList(conStr, "SpSelectBrandAll");
             result.Sort(new CompareBrandsByName());
             return result;
         }
-
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given ID
         /// </summary>
@@ -324,8 +338,15 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectBrandById");
         }
-        #endregion
+        public static bool InsertBrand(string conStr, string name, string description)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (StringIsNullOrEmpty(name)) { return false; }
+            string query = $"EXEC SpInsertBrand '{name}', '{description}'";
 
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
+        #endregion
         #region Store queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
@@ -338,7 +359,6 @@ namespace SqlLibrary.Queries
             return SearchTableByName(conStr, name, "SpSelectStoreByName");
         }
         #endregion
-
         #region Product queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing a single row matching the given Name
@@ -423,8 +443,32 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectProductById");
         }
-        #endregion
+        public static bool InsertProduct(string conStr, Product prod)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (prod is null) { return false; }
+            if (prod.Gpn.Id == 0) { return false; }
+            if (prod.Brand.Id == 0) { return false; }
+            string query = $"EXEC SpInsertProduct '{prod.Barcode}', {prod.Gpn.Id}, '{prod.Brand.Id}', '{prod.Name}', '{prod.Comments}', '{prod.ImageFileName}'";
 
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
+
+        public static bool UpdateProduct(string conStr, Product prod)
+        {
+            if (StringIsNullOrEmpty(conStr)) { return false; }
+            if (prod is null) { return false; }
+            if (prod.Name is null) { return false; }
+            if (prod.Barcode is null) { return false; }
+            if (prod.Gpn.Id == 0) { return false; }
+            if (prod.Gpn.Group.Id == 0) { return false; }
+            if (prod.Gpn.Group.Category.Id == 0) { return false; }
+            if (prod.Brand.Id == 0) { return false; }
+            string query = $"EXEC SpUpdateProduct {prod.Id}, '{prod.Barcode}', {prod.Gpn.Id}, {prod.Brand.Id}, '{prod.Name}', '{prod.Comments}', '{prod.ImageFileName}'";
+
+            return InsertOrUpdateOneRowInTable(conStr, query);
+        }
+        #endregion
         #region Store Queries
         /// <summary>
         /// Returns a <seealso cref="DataTable"></seealso> containing all rows for the given table
@@ -477,75 +521,16 @@ namespace SqlLibrary.Queries
         {
             return SearchTableByID(conStr, id, "SpSelectStoreById");
         }
-        #endregion
-
-        #region Insert into
-        /// <summary>
-        /// Inserts a record into the specified table
-        /// </summary>
-        /// <param name="conStr">The sql connection string</param>
-        /// <param name="name">The name field of the record</param>
-        /// <param name="description">The description field of the record</param>
-        /// <returns></returns>
-        public static bool InsertCategory(string conStr, string name, string description)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return false; }
-            if (StringIsNullOrEmpty(name)) { return false; }
-            string query = $"EXEC SpInsertCategory '{name}', '{description}'";
-
-            return InsertIntoTable(conStr, query);
-        }
-
-        public static bool InsertGroup(string conStr, Group group)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return false; }
-            if (StringIsNullOrEmpty(group.Name)) { return false; }
-            if (StringIsNullOrEmpty(group.Category.Name)) { return false; }
-            if (group.Category.Id < 1) { return false; }
-            string query = $"EXEC SpInsertGroup '{group.Name}', '{group.Description}', {group.Category.Id}";
-
-            return InsertIntoTable(conStr, query);
-        }
-
-        public static bool InsertBrand(string conStr, string name, string description)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return false; }
-            if (StringIsNullOrEmpty(name)) { return false; }
-            string query = $"EXEC SpInsertBrand '{name}', '{description}'";
-
-            return InsertIntoTable(conStr, query);
-        }
-
         public static bool InsertStore(string conStr, string name, string description)
         {
             if (StringIsNullOrEmpty(conStr)) { return false; }
             if (StringIsNullOrEmpty(name)) { return false; }
             string query = $"EXEC SpInsertStore '{name}', '{description}'";
 
-            return InsertIntoTable(conStr, query);
+            return InsertOrUpdateOneRowInTable(conStr, query);
         }
-
-        public static bool InsertGpn(string conStr, GenericProductName gpn)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return false; }
-            if (gpn is null) { return false; }
-            if (gpn.Group.Id == 0) { return false; }
-            string query = $"EXEC SpInsertGenericProductName '{gpn.Name}', '', {gpn.Group.Id}";
-
-            return InsertIntoTable(conStr, query);
-        }
-
-        public static bool InsertProduct(string conStr, Product prod)
-        {
-            if (StringIsNullOrEmpty(conStr)) { return false; }
-            if (prod is null) { return false; }
-            if (prod.Gpn.Id == 0) { return false; }
-            if (prod.Brand.Id == 0) { return false; }
-            string query = $"EXEC SpInsertProduct '{prod.Barcode}', {prod.Gpn.Id}, '{prod.Brand.Id}', '{prod.Name}', '{prod.Comments}', '{prod.ImageFileName}'";
-
-            return InsertIntoTable(conStr, query);
-        }
-
+        #endregion
+        #region Stock in queries
         public static bool InsertStockInMulti(string conStr, StockIn stock, out int rowsAffected)
         {
             if (StringIsNullOrEmpty(conStr)) { rowsAffected = 0; return false; }
@@ -570,7 +555,8 @@ namespace SqlLibrary.Queries
             }
 
         }
-
+        #endregion
+        #region Stock out queries
         public static bool InsertStockOutMulti(string conStr, StockOut stock, out int rowsAffected)
         {
             if (StringIsNullOrEmpty(conStr)) { rowsAffected = 0; return false; }
@@ -596,6 +582,5 @@ namespace SqlLibrary.Queries
 
         }
         #endregion
-
     }
 }

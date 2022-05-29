@@ -208,14 +208,16 @@ namespace WinFormUI.Helper
             string addButtonText = "Add"
         )
         {
-            ProductForm f = new ProductForm();
-            f.Text = title;
-            System.Windows.Forms.Control[] controls = f.Controls.Find("btnAdd", true);
-            if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
-
+            Form f;
+            System.Windows.Forms.Control[] controls;
             switch (mode)
             {
                 case FormMode.New:
+                    f = new ProductForm();
+                    f.Text = title;
+                    //TODO: use first controls function in utils
+                    controls = f.Controls.Find("btnAdd", true);
+                    if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
                     EnableControl("cmbCategoryName", f, true);
                     EnableControl("cmbGroupName", f, true);
                     EnableControl("cmbGpnName", f, true);
@@ -226,18 +228,31 @@ namespace WinFormUI.Helper
                     EnableControl("txtProductComments", f, true);
                     EnableControl("txtFilePath", f, true);
                     EnableControl("btnBrowseFileName", f, true);
-                    break;
+                    return f;
                 case FormMode.Edit:
-                    break;
+                    f = new UpdateProductForm();
+                    f.Text = title;
+                    //TODO: use first controls function in utils
+                    controls = f.Controls.Find("btnAdd", true);
+                    if (controls.Length == 1) ((System.Windows.Forms.Button)controls[0]).Text = addButtonText;
+                    EnableControl("cmbCategoryName", f, true);
+                    EnableControl("cmbGroupName", f, true);
+                    EnableControl("cmbGpnName", f, true);
+                    EnableControl("cmbBrandName", f, true);
+                    EnableControl("txtProductID", f, false);
+                    EnableControl("txtBarcode", f, true);
+                    EnableControl("txtProductName", f, true);
+                    EnableControl("txtProductComments", f, true);
+                    EnableControl("txtFilePath", f, true);
+                    EnableControl("btnBrowseFileName", f, true);
+                    return f;
                 case FormMode.View:
-                    break;
+                    throw new NotImplementedException("FormMode.View is not implemented in method MakeProductForm");
                 case FormMode.Delete:
-                    break;
+                    throw new NotImplementedException("FormMode.Delete is not implemented in method MakeProductForm");
                 default:
-                    break;
+                    throw new ArgumentException("FormMode parameter is invalid in method MakeProductForm");
             }
-
-            return f;
         }
 
         public static Form MakeNewProductForm()
@@ -250,8 +265,19 @@ namespace WinFormUI.Helper
             return f;
         }
 
+        public static Form MakeUpdateProductForm()
+        {
+            Form f = FormFactory.MakeProductForm(
+                FormMode.Edit,
+                "Edit Product",
+                "Update"
+            );
+            return f;
+        }
+
         public static Form MakeViewProductForm()
         {
+            //Todo: Delete this implementation and implement in MakeProductForm
             ViewProductForm f = new ViewProductForm();
             EnableControl("txtCategoryName", f, false);
             EnableControl("txtGroupName", f, false);
